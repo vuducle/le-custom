@@ -78,7 +78,15 @@ $legal_data = $contact_data['legal'];
 
                         <h2>VAT ID</h2>
                         <p>Value Added Tax Identification Number according to § 27 a Value Added Tax Act:<br>
-                            [Insert your VAT ID here]</p>
+                            <?php
+                            $vat_id = $contact_data['vat_id'];
+                            if (!empty($vat_id)) {
+                                echo esc_html($vat_id);
+                            } else {
+                                echo '[Insert your VAT ID here]';
+                            }
+                            ?>
+                        </p>
 
                         <h2>Editorially Responsible</h2>
                         <p>

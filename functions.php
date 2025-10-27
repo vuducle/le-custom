@@ -374,6 +374,7 @@ function le_custom_get_contact_data()
             'link' => get_theme_mod('contact_phone_link', '030624792'),
         ],
         'email' => get_theme_mod('contact_email', 'denis@java.com'),
+        'vat_id' => get_theme_mod('vat_id', ''),
         'opening_hours' => [
             'monday' => get_theme_mod('opening_monday', '09:00 - 12:00 Uhr, 13:00 - 18:00 Uhr'),
             'tuesday' => get_theme_mod('opening_tuesday', '08:00 - 12:00 Uhr, 13:00 - 18:00 Uhr'),

@@ -227,6 +227,20 @@ function le_custom_add_contact_section($wp_customize)
         'type'    => 'email',
     ]);
 
+    // VAT ID Setting
+    $wp_customize->add_setting('vat_id', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'postMessage',
+    ]);
+
+    $wp_customize->add_control('vat_id', [
+        'label'       => __('VAT ID / USt-IdNr.', 'le-custom'),
+        'description' => __('Value Added Tax Identification Number (e.g., DE123456789)', 'le-custom'),
+        'section'     => 'contact_information',
+        'type'        => 'text',
+    ]);
+
     // Opening Hours Settings - Individual Days
     $wp_customize->add_setting('opening_monday', [
         'default'           => '09:00 - 12:00 Uhr, 13:00 - 18:00 Uhr',

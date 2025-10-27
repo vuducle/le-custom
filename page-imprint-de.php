@@ -76,7 +76,15 @@ $legal_data = $contact_data['legal'];
 
                         <h2>Umsatzsteuer-ID</h2>
                         <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
-                            [Ihre USt-IdNr. hier einfügen]</p>
+                            <?php
+                            $vat_id = $contact_data['vat_id'];
+                            if (!empty($vat_id)) {
+                                echo esc_html($vat_id);
+                            } else {
+                                echo '[Ihre USt-IdNr. hier einfügen]';
+                            }
+                            ?>
+                        </p>
 
                         <h2>Redaktionell verantwortlich</h2>
                         <p>
