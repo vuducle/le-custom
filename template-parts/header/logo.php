@@ -19,7 +19,14 @@ $color_scheme = le_custom_get_color_scheme_data();
             <!-- Company name next to custom logo -->
             <a href="<?php echo esc_url(home_url('/')); ?>"
                 class="group text-lg lg:text-xl font-bold transition-all duration-300 hover:scale-105">
-                <span class="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent group-hover:from-emerald-600 group-hover:to-emerald-800 transition-all duration-300">
+                <span class="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent transition-all duration-300" 
+                      style="--tw-gradient-from: #111827; --tw-gradient-to: #374151;">
+                    <style>
+                        .group:hover .bg-gradient-to-r {
+                            --tw-gradient-from: <?php echo esc_attr($color_scheme['primary']); ?>;
+                            --tw-gradient-to: <?php echo esc_attr($color_scheme['secondary']); ?>;
+                        }
+                    </style>
                     <?php bloginfo('name'); ?>
                 </span>
             </a>
@@ -34,7 +41,14 @@ $color_scheme = le_custom_get_color_scheme_data();
                 </svg>
             </div>
             <!-- Site name with gradient text -->
-            <span class="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent group-hover:from-emerald-600 group-hover:to-emerald-800 transition-all duration-300">
+            <span class="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent transition-all duration-300"
+                  style="--tw-gradient-from: #111827; --tw-gradient-to: #374151;">
+                <style>
+                    .group:hover .bg-gradient-to-r {
+                        --tw-gradient-from: <?php echo esc_attr($color_scheme['primary']); ?>;
+                        --tw-gradient-to: <?php echo esc_attr($color_scheme['secondary']); ?>;
+                    }
+                </style>
                 <?php bloginfo('name'); ?>
             </span>
         </a>
