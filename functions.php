@@ -22,6 +22,7 @@ require_once get_template_directory() . '/inc/services-admin.php';
 require_once get_template_directory() . '/inc/about-section.php';
 require_once get_template_directory() . '/inc/gallery-block.php';
 require_once get_template_directory() . '/inc/single-image-block.php';
+require_once get_template_directory() . '/inc/child-pages-block.php';
 require_once get_template_directory() . '/inc/contact-form-handler.php';
 require_once get_template_directory() . '/inc/sitemap-generator.php';
 require_once get_template_directory() . '/inc/cookie-consent.php';

@@ -1,0 +1,198 @@
+/**
+ * Child Pages Block - Styles
+ * 
+ * Styling for the child pages block on the frontend
+ */
+
+/* Block Container */
+.child-pages-block {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Card Styles */
+.child-page-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.child-page-card:hover {
+    transform: translateY(-4px);
+}
+
+.child-page-card a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Image Container */
+.child-page-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.child-page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content Area */
+.child-page-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.child-page-title {
+    margin-bottom: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.child-page-excerpt {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Limit excerpt to 3 lines */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.child-page-link {
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.child-page-link svg {
+    transition: transform 0.3s ease;
+}
+
+.child-page-card:hover .child-page-link svg {
+    transform: translateX(4px);
+}
+
+/* List Layout Specific Styles */
+.child-pages-list .child-page-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.child-pages-list .child-page-card a {
+    flex-direction: row;
+}
+
+.child-pages-list .child-page-image {
+    width: 250px;
+    min-width: 250px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
+.child-pages-list .child-page-content {
+    flex: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .child-pages-list .child-page-card {
+        flex-direction: column;
+    }
+
+    .child-pages-list .child-page-card a {
+        flex-direction: column;
+    }
+
+    .child-pages-list .child-page-image {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* No Children Message */
+.child-pages-block.no-children {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+}
+
+/* Loading State */
+.child-pages-block.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.child-page-card {
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+/* Stagger animation for grid items */
+.child-pages-grid .child-page-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.child-pages-grid .child-page-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.child-pages-grid .child-page-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.child-pages-grid .child-page-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.child-pages-grid .child-page-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.child-pages-grid .child-page-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* List animation */
+.child-pages-list .child-page-card {
+    animation-delay: 0.1s;
+}
+
+.child-pages-list .child-page-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.child-pages-list .child-page-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.child-pages-list .child-page-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Editor Preview Styles */
+.child-pages-block-editor-preview {
+    text-align: center;
+    padding: 2rem;
+}
