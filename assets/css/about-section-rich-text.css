@@ -1,0 +1,344 @@
+/* About Section Rich Text Styling */
+
+/* Prose container for rich text content */
+.about-section .prose {
+    color: #4B5563; /* text-gray-600 */
+    line-height: 1.75;
+}
+
+/* Glassmorphism Image Containers */
+.about-section .about-image-gallery {
+    position: relative;
+}
+
+.about-section .about-image-gallery a {
+    display: block;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 4px 16px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-section .about-image-gallery a:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.about-section .about-image-gallery img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95) contrast(1.05);
+}
+
+.about-section .about-image-gallery a:hover img {
+    filter: brightness(1.05) contrast(1.1);
+    transform: scale(1.05);
+}
+
+/* Glassmorphism overlay for image-only blocks */
+.about-section .image-only-container {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.12),
+        0 6px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-section .image-only-container:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 
+        0 24px 48px rgba(0, 0, 0, 0.18),
+        0 12px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.about-section .image-only-container img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95) contrast(1.05);
+}
+
+.about-section .image-only-container:hover img {
+    filter: brightness(1.08) contrast(1.15);
+    transform: scale(1.08);
+}
+
+/* Enhanced glassmorphism for opening hours container */
+.about-section .opening-hours-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 4px 16px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-section .opening-hours-glass:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 16px 40px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Highlighted text */
+.about-section .prose mark {
+    background-color: #FEF3C7; /* yellow-100 */
+    color: #92400E; /* amber-800 */
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+/* Links */
+.about-section .prose a {
+    color: #2563EB; /* blue-600 */
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease-in-out;
+}
+
+.about-section .prose a:hover {
+    color: #1D4ED8; /* blue-700 */
+    text-decoration-color: #1D4ED8;
+}
+
+/* Bold text */
+.about-section .prose strong {
+    font-weight: 600;
+    color: #374151; /* gray-700 */
+}
+
+/* Italic text */
+.about-section .prose em {
+    font-style: italic;
+    color: #6B7280; /* gray-500 */
+}
+
+/* Line breaks */
+.about-section .prose br {
+    display: block;
+    content: "";
+    margin-top: 0.5rem;
+}
+
+/* Lists within prose */
+.about-section .prose ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.about-section .prose ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-section .prose ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #10B981; /* green-500 */
+    font-weight: bold;
+}
+
+/* Special styling for highlighted links */
+.about-section .prose mark a {
+    color: #DC2626; /* red-600 */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.about-section .prose mark a:hover {
+    color: #B91C1C; /* red-700 */
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-section .prose {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .about-section .prose mark {
+        padding: 0.1rem 0.2rem;
+        font-size: 0.95rem;
+    }
+    
+    /* Mobile glassmorphism adjustments */
+    .about-section .about-image-gallery a {
+        border-radius: 16px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .about-section .about-image-gallery img {
+        height: 240px;
+        border-radius: 12px;
+    }
+    
+    .about-section .image-only-container {
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .about-section .image-only-container img {
+        height: 320px;
+    }
+    
+    .about-section .opening-hours-glass {
+        padding: 1.5rem;
+        border-radius: 16px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+}
+
+/* Enhanced glassmorphism effects for modern browsers */
+@supports (backdrop-filter: blur(20px)) {
+    .about-section .about-image-gallery a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        border-radius: 20px;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    .about-section .image-only-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+        border-radius: 24px;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    .about-section .opening-hours-glass::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        border-radius: 20px;
+        pointer-events: none;
+        z-index: -1;
+    }
+}
+
+/* Performance optimizations */
+.about-section {
+    contain: layout style paint;
+    will-change: auto;
+}
+
+.about-section .about-image-gallery a,
+.about-section .image-only-container,
+.about-section .opening-hours-glass {
+    contain: layout style paint;
+    will-change: transform;
+}
+
+.about-section img {
+    contain: layout style paint;
+    will-change: auto;
+}
+
+/* Preload critical images */
+.about-section .about-image-gallery a:first-child img,
+.about-section .image-only-container:first-child img {
+    will-change: transform;
+}
+
+/* Optimize animations for performance */
+@media (prefers-reduced-motion: reduce) {
+    .about-section .about-image-gallery a,
+    .about-section .image-only-container,
+    .about-section .opening-hours-glass,
+    .about-section img {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+/* Print styles for better SEO */
+@media print {
+    .about-section .about-image-gallery a,
+    .about-section .image-only-container {
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #fff !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .about-section img {
+        filter: none !important;
+        transform: none !important;
+    }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+    
+    
+    .about-section .prose mark {
+        background-color: #451A03; /* amber-900 */
+        color: #FCD34D; /* amber-300 */
+    }
+    
+    .about-section .prose a {
+        color: #60A5FA; /* blue-400 */
+    }
+    
+    .about-section .prose a:hover {
+        color: #93C5FD; /* blue-300 */
+    }
+} 

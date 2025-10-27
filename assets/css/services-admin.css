@@ -1,0 +1,259 @@
+/**
+ * Services Admin Styles
+ * 
+ * Custom styles for the services management interface
+ */
+
+/* Tab Navigation */
+.nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Service Items */
+.service-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.service-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.service-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+}
+
+.service-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.service-header .remove-service {
+    color: #dc3545;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.service-header .remove-service:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Service Fields */
+.service-fields {
+    padding: 20px;
+}
+
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+    border-color: #0073aa;
+    outline: none;
+    box-shadow: 0 0 0 1px #0073aa;
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Form Row for inline fields */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* Add Service Button */
+.add-service {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* Services Container */
+.services-container {
+    min-height: 100px;
+    padding: 10px 0;
+}
+
+/* Sortable Placeholder */
+.service-item-placeholder {
+    background: #f0f0f0;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #0073aa;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+.spinner.is-active {
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Notices */
+.notice {
+    margin: 20px 0;
+    padding: 12px 15px;
+    border-left: 4px solid;
+    background: #fff;
+}
+
+.notice-success {
+    border-left-color: #46b450;
+    background-color: #f7fcf7;
+}
+
+.notice-error {
+    border-left-color: #dc3232;
+    background-color: #fef7f7;
+}
+
+/* Required field indicator */
+.form-field label:after {
+    content: " *";
+    color: #dc3232;
+}
+
+.form-field label[for*="button_text"]:after,
+.form-field label[for*="button_url"]:after,
+.form-field label[for*="icon"]:after {
+    content: "";
+}
+
+/* Icon preview (future enhancement) */
+.icon-preview {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .service-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .service-fields {
+        padding: 15px;
+    }
+    
+    .form-field {
+        margin-bottom: 12px;
+    }
+}
+
+/* Loading state */
+.service-item.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Success animation */
+.service-item.saved {
+    animation: savedPulse 0.5s ease-in-out;
+}
+
+@keyframes savedPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Help text */
+.help-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Character counter (optional) */
+.char-counter {
+    font-size: 11px;
+    color: #999;
+    text-align: right;
+    margin-top: 2px;
+}
+
+.char-counter.warning {
+    color: #f39c12;
+}
+
+.char-counter.error {
+    color: #e74c3c;
+} 

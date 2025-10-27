@@ -1,0 +1,18 @@
+{
+  "name": "le-custom-theme",
+  "version": "1.0.0",
+  "description": "Custom WordPress theme with Tailwind CSS",
+  "authors": ["Minh", "Duc"],
+  "scripts": {
+    "build": "postcss src/input.css -o dist/output.css",
+    "watch": "postcss src/input.css -o dist/output.css --watch",
+    "dev": "npm run watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.5",
+    "@tailwindcss/typography": "^0.5.10"
+  }
+} 

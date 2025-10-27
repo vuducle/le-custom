@@ -1,0 +1,18 @@
+# Example .htaccess rules for German/English landing pages
+# Add this to your .htaccess file in the WordPress root directory
+
+# Redirect /de to German landing page
+RewriteRule ^de/?$ /index.php?pagename=de [L,QSA]
+
+# Redirect /en to English landing page  
+RewriteRule ^en/?$ /index.php?pagename=en [L,QSA]
+
+# Standard WordPress rules (keep these)
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule> 
