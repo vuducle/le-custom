@@ -178,8 +178,21 @@ document.addEventListener('DOMContentLoaded', function() {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
     `;
-    scrollToTopButton.className = 'fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110';
+    scrollToTopButton.className = 'fixed bottom-4 right-4 md:bottom-8 md:right-8 text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110';
     scrollToTopButton.id = 'scroll-to-top';
+    
+    // Get primary color from CSS variable or use fallback
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#10b981';
+    scrollToTopButton.style.background = primaryColor;
+    
+    // Add hover effect
+    scrollToTopButton.addEventListener('mouseenter', function() {
+        this.style.filter = 'brightness(0.9)';
+    });
+    scrollToTopButton.addEventListener('mouseleave', function() {
+        this.style.filter = 'brightness(1)';
+    });
+    
     document.body.appendChild(scrollToTopButton);
     
     // Show/hide scroll to top button
