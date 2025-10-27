@@ -101,6 +101,18 @@ function le_custom_output_dynamic_css()
     echo 'box-shadow: 0 4px 12px rgba(' . esc_attr(hex2rgb($color_scheme['primary'])) . ', 0.3) !important;';
     echo '}';
 
+    // Footer menu link styles
+    echo 'footer nav a {';
+    echo 'color: #374151 !important;'; // gray-700
+    echo 'transition: all 0.3s ease;';
+    echo 'font-weight: 500;';
+    echo '}';
+
+    echo 'footer nav a:hover {';
+    echo 'color: ' . esc_attr($color_scheme['primary']) . ' !important;';
+    echo 'text-decoration: none;';
+    echo '}';
+
     echo '</style>';
 }
 add_action('wp_head', 'le_custom_output_dynamic_css');
