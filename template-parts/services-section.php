@@ -100,7 +100,7 @@ function le_custom_get_service_icon($icon_name)
 $color_scheme = le_custom_get_color_scheme_data();
 
 // Determine section classes based on position
-$section_classes = 'services-section ';
+$section_classes = 'services-section abdullah-yildirim ';
 $container_classes = '';
 
 if ($services_position === 'overlay') {
@@ -126,27 +126,29 @@ if ($services_position === 'overlay') {
             </div>
         <?php endif; ?>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             <?php foreach ($services_list as $index => $service): ?>
-                <div class="<?php echo esc_attr($container_classes); ?> p-6 rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-gray-900"
-                    style="border-color: <?php echo esc_attr($color_scheme['primary']); ?>20;"
-                    data-aos="fade-up" data-aos-delay="<?php echo ($index + 1) * 100; ?>" data-aos-duration="800">
-                    <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4"
+                <div class="<?php echo esc_attr($container_classes); ?> p-6 rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-gray-900 flex flex-col text-center"
+                    style="border-color: <?php echo esc_attr($color_scheme['primary']); ?>20;" data-aos="fade-up"
+                    data-aos-delay="<?php echo ($index + 1) * 100; ?>" data-aos-duration="800">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto"
                         style="background-color: <?php echo esc_attr($color_scheme['primary_light']); ?>;">
                         <?php echo le_custom_get_service_icon($service['icon'] ?? 'default'); ?>
                     </div>
                     <h3 class="text-lg font-semibold mb-3 text-gray-900">
                         <?php echo esc_html($service['title']); ?>
                     </h3>
-                    <p class="text-sm mb-4 text-gray-700 leading-relaxed">
+                    <p class="text-sm mb-6 text-gray-700 leading-relaxed flex-1">
                         <?php echo esc_html($service['description']); ?>
                     </p>
                     <?php if (!empty($service['button_text'])): ?>
-                        <a href="<?php echo esc_url($service['button_url']); ?>"
-                            class="inline-block text-white border px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                            style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>; border-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
-                            <?php echo esc_html($service['button_text']); ?>
-                        </a>
+                        <div class="mt-auto">
+                            <a href="<?php echo esc_url($service['button_url']); ?>"
+                                class="inline-block text-white border px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>; border-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
+                                <?php echo esc_html($service['button_text']); ?>
+                            </a>
+                        </div>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
