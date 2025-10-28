@@ -1,0 +1,122 @@
+/**
+ * Gallery Block Editor Styles
+ * 
+ * Styles specifically for the WordPress block editor interface
+ */
+
+/* Editor-specific Gallery Controls */
+.le-custom-gallery-block .gallery-image {
+  position: relative;
+}
+
+.le-custom-gallery-block .gallery-image-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.le-custom-gallery-block .replace-image-button,
+.le-custom-gallery-block .remove-image-button {
+  padding: 6px 12px;
+  font-size: 11px;
+  border-radius: 4px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.le-custom-gallery-block .replace-image-button {
+  background: #0073aa;
+  border-color: #0073aa;
+  color: white;
+}
+
+.le-custom-gallery-block .replace-image-button:hover {
+  background: #005a87;
+  border-color: #005a87;
+  transform: translateY(-1px);
+}
+
+.le-custom-gallery-block .remove-image-button {
+  background: #d63638;
+  border-color: #d63638;
+  color: white;
+}
+
+.le-custom-gallery-block .remove-image-button:hover {
+  background: #b32d2e;
+  border-color: #b32d2e;
+  transform: translateY(-1px);
+}
+
+.le-custom-gallery-block .gallery-upload-button {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 12px 24px;
+  background: #0073aa;
+  color: white;
+  border: 1px solid #0073aa;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.le-custom-gallery-block .gallery-upload-button:hover {
+  background: #005a87;
+  border-color: #005a87;
+  transform: translateY(-1px);
+}
+
+.le-custom-gallery-block .gallery-empty {
+  text-align: center;
+  padding: 3rem;
+  color: #757575;
+  font-style: italic;
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.le-custom-gallery-block .gallery-with-lightbox {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.le-custom-gallery-block .gallery-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.le-custom-gallery-block .gallery-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Inspector Controls Styling */
+.le-custom-gallery-block .components-checkbox-control {
+  margin-bottom: 12px;
+}
+
+.le-custom-gallery-block .components-checkbox-control input {
+  margin-right: 8px;
+}
+
+.le-custom-gallery-block .components-checkbox-control span {
+  font-size: 13px;
+  color: #1e1e1e;
+}

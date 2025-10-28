@@ -141,7 +141,7 @@ function le_custom_filter_gallery_block($block_content, $block)
 add_filter('render_block', 'le_custom_filter_gallery_block', 10, 2);
 
 /**
- * Add gallery block inserter button to editor
+ * Add gallery block inserter to editor
  */
 function le_custom_add_gallery_block_inserter()
 {
@@ -151,6 +151,14 @@ function le_custom_add_gallery_block_inserter()
         ['wp-blocks', 'wp-element', 'wp-editor'],
         wp_get_theme()->get('Version'),
         true
+    );
+
+    // Enqueue editor-specific CSS for gallery controls
+    wp_enqueue_style(
+        'le-custom-gallery-editor-css',
+        get_template_directory_uri() . '/assets/css/gallery-block-editor.css',
+        [],
+        wp_get_theme()->get('Version')
     );
 }
 add_action('enqueue_block_editor_assets', 'le_custom_add_gallery_block_inserter');
