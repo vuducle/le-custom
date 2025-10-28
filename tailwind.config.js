@@ -5,6 +5,9 @@ module.exports = {
     "./**/*.php",
     "./assets/**/*.js"
   ],
+  safelist: [
+    'btn-secondary'
+  ],
   theme: {
     extend: {
       fontFamily: {

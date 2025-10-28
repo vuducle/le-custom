@@ -80,6 +80,14 @@ function le_custom_enqueue_styles()
         [],
         '1.0'
     );
+    
+    // Enqueue compiled Tailwind CSS
+    wp_enqueue_style(
+        'tailwind-style',
+        get_template_directory_uri() . '/dist/output.css',
+        [],
+        '1.0'
+    );
 }
 
 /**
