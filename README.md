@@ -14,6 +14,7 @@ A modern, multilingual WordPress theme built with Tailwind CSS, designed for den
 - 🔧 **Easy Customization** via WordPress Customizer
 - 📊 **SEO Optimized**
 - 🎯 **Professional Email System** (works automatically on production)
+- 👤 **Enhanced Page Admin Interface** with quick edit metadata management
 
 ## Setup Instructions
 
@@ -72,7 +73,8 @@ le-custom/
 │   ├── js/
 │   │   ├── theme.js                 # Main theme JavaScript
 │   │   ├── customizer.js            # Customizer live preview
-│   │   └── services-admin.js        # Services admin functionality
+│   │   ├── services-admin.js        # Services admin functionality
+│   │   └── quick-edit-meta.js       # Enhanced page admin interface
 │   ├── fonts/                       # Custom fonts
 │   └── img/                         # Theme images
 ├── inc/
@@ -82,6 +84,7 @@ le-custom/
 │   ├── navigation.php               # Navigation functionality
 │   ├── hero-section.php             # Hero section components
 │   ├── services-admin.php           # Services management
+│   ├── quick-edit-meta.php          # Enhanced page admin interface
 │   └── ...                          # Other modular components
 ├── template-parts/                   # Reusable template components
 ├── page-contact-de.php              # German contact page
@@ -93,6 +96,61 @@ le-custom/
 ├── postcss.config.js                # PostCSS configuration
 └── tailwind.config.js               # Tailwind CSS configuration
 ```
+
+## Enhanced Page Admin Interface
+
+### Overview
+
+The theme includes an enhanced WordPress admin interface for managing page metadata directly from the pages list with:
+
+- 📝 **Quick Edit Enhancement** - Edit page metadata without opening full edit screen
+- 🏗️ **Page Hierarchy Management** - Set parent-child relationships easily
+- 🔗 **URL Slug Editing** - Modify page slugs with auto-formatting
+- 📊 **SEO Optimization** - Custom page titles and meta descriptions
+- 📱 **Mobile Responsive** - Works perfectly on all devices
+- ⚡ **Real-time Validation** - Character counters and format checking
+
+### Features
+
+#### Quick Edit Fields
+
+- **Page Slug**: Edit URL slugs with automatic formatting (removes spaces, special characters)
+- **Parent Page**: Select parent pages to create hierarchical site structure
+- **Custom Page Title**: Override auto-generated SEO titles (max 70 characters)
+- **Meta Description**: Set custom meta descriptions for search engines (max 160 characters)
+
+#### Enhanced Admin Columns
+
+- **Slug Column**: Displays current page slugs in code format
+- **Parent Column**: Shows parent page with clickable edit link
+- **Meta Description Column**: Preview of current meta descriptions
+
+#### User Experience
+
+- **Character Counters**: Real-time feedback for optimal SEO lengths
+- **Auto-formatting**: Slugs automatically converted to URL-friendly format
+- **Visual Feedback**: Success states, loading indicators, validation messages
+- **Professional Styling**: Clean interface matching WordPress design
+
+### How to Use
+
+1. **Navigate** to `Pages > All Pages` in WordPress admin
+2. **Click** "Quick Edit" on any page
+3. **Use** enhanced fields in the right panel:
+   - Set page slug (auto-formatted)
+   - Choose parent page from dropdown
+   - Add custom SEO title and meta description
+4. **Save** changes and see immediate feedback
+
+### Benefits
+
+- ⚡ **Faster Workflow** - Edit metadata without full page editor
+- 🎯 **Better SEO** - Easy optimization of titles and descriptions
+- 🏗️ **Site Structure** - Simple hierarchy management
+- 📱 **Mobile Friendly** - Touch-optimized for tablets and phones
+- ✅ **Data Integrity** - Built on WordPress core functionality
+
+For detailed usage instructions, see: [Enhanced Page Admin Documentation](doc/README-ENHANCED-PAGE-ADMIN.md)
 
 ## Contact Form System
 
@@ -171,6 +229,7 @@ $config = [
 3. **Templates**: Edit PHP files to modify layout and functionality
 4. **Contact Form**: Customize in `inc/contact-form-handler.php`
 5. **Email Templates**: Modify email HTML in contact form handler
+6. **Page Admin Interface**: Customize in `inc/quick-edit-meta.php` and `assets/js/quick-edit-meta.js`
 
 ### Build Process
 
