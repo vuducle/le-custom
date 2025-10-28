@@ -63,32 +63,14 @@
                         <!-- German Language -->
                         <a href="<?php echo home_url('/de/'); ?>"
                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-medium <?php echo $current_lang === 'de' ? 'active bg-white text-gray-900 shadow-sm active-language' : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'; ?>">
-                            <div class="w-4 h-3 rounded-sm overflow-hidden flex-shrink-0 shadow-sm">
-                                <svg viewBox="0 0 640 480" class="w-full h-full">
-                                    <path fill="#ffce00" d="M0 320h640v160H0z" />
-                                    <path d="M0 0h640v160H0z" />
-                                    <path fill="#d00" d="M0 160h640v160H0z" />
-                                </svg>
-                            </div>
+
                             <span>DE</span>
                         </a>
 
                         <!-- English Language -->
                         <a href="<?php echo home_url('/en/'); ?>"
                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-medium <?php echo $current_lang === 'en' ? 'active bg-white text-gray-900 shadow-sm active-language' : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'; ?>">
-                            <div class="w-4 h-3 rounded-sm overflow-hidden flex-shrink-0 shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 30" class="w-full h-full">
-                                    <clipPath id="t">
-                                        <path d="M25,15h25v15zv15h-25zh-25v-15zv-15h25z" />
-                                    </clipPath>
-                                    <path d="M0,0v30h50v-30z" fill="#012169" />
-                                    <path d="M0,0 50,30M50,0 0,30" stroke="#fff" stroke-width="6" />
-                                    <path d="M0,0 50,30M50,0 0,30" clip-path="url(#t)" stroke="#C8102E"
-                                        stroke-width="4" />
-                                    <path d="M-1 11h22v-12h8v12h22v8h-22v12h-8v-12h-22z" fill="#C8102E" stroke="#FFF"
-                                        stroke-width="2" />
-                                </svg>
-                            </div>
+
                             <span>EN</span>
                         </a>
                     </div>

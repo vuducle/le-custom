@@ -627,10 +627,10 @@ function le_custom_display_hero_section($post_id = null)
                         <?php endif; ?>
                         <?php if ($hero_data['secondary_button_text']): ?>
                             <a href="<?php echo esc_url($hero_data['secondary_button_url'] ?: '#leistungen'); ?>"
-                                class="px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
-                                style="border: 2px solid <?php echo esc_attr($secondary_color); ?>; color: <?php echo esc_attr($secondary_color); ?>; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
-                                onmouseover="this.style.backgroundColor='<?php echo esc_attr($secondary_color); ?>'; this.style.color='white'"
-                                onmouseout="this.style.backgroundColor='transparent'; this.style.color='<?php echo esc_attr($secondary_color); ?>'">
+                                class="px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-white"
+                                style="background-color: <?php echo esc_attr($secondary_color); ?>; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
+                                onmouseover="this.style.backgroundColor='<?php echo esc_attr($secondary_color); ?>'; this.style.filter='brightness(0.8)'"
+                                onmouseout="this.style.backgroundColor='<?php echo esc_attr($secondary_color); ?>'; this.style.filter='brightness(1)'">
                                 <?php echo esc_html($hero_data['secondary_button_text']); ?>
                             </a>
                         <?php endif; ?>
