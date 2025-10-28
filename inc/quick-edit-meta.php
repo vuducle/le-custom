@@ -60,7 +60,7 @@ function le_custom_quick_edit_meta_description_field($column_name, $post_type)
 }
 
 /**
- * Save meta description from quick edit
+ * Save enhanced meta data from quick edit
  */
 function le_custom_save_quick_edit_meta_description($post_id)
 {
@@ -79,6 +79,39 @@ function le_custom_save_quick_edit_meta_description($post_id)
         return;
     }
 
+    // Get the post object
+    $post = get_post($post_id);
+    if (!$post || $post->post_type !== 'page') {
+        return;
+    }
+
+    // Prepare update data
+    $update_data = ['ID' => $post_id];
+    $needs_update = false;
+
+    // Handle slug update
+    if (isset($_POST['post_name']) && !empty($_POST['post_name'])) {
+        $new_slug = sanitize_title($_POST['post_name']);
+        if ($new_slug !== $post->post_name) {
+            $update_data['post_name'] = $new_slug;
+            $needs_update = true;
+        }
+    }
+
+    // Handle parent page update
+    if (isset($_POST['post_parent'])) {
+        $new_parent = intval($_POST['post_parent']);
+        if ($new_parent !== $post->post_parent) {
+            $update_data['post_parent'] = $new_parent;
+            $needs_update = true;
+        }
+    }
+
+    // Update post if needed
+    if ($needs_update) {
+        wp_update_post($update_data);
+    }
+
     // Save meta description if provided
     if (isset($_POST['meta_description'])) {
         $meta_description = sanitize_textarea_field($_POST['meta_description']);
@@ -94,19 +127,48 @@ function le_custom_save_quick_edit_meta_description($post_id)
 add_action('save_post', 'le_custom_save_quick_edit_meta_description');
 
 /**
- * Alternative method to add meta description field to quick edit
+ * Alternative method to add enhanced meta fields to quick edit
  */
 function le_custom_add_quick_edit_meta_description_alternative()
 {
     $screen = get_current_screen();
     if ($screen && $screen->id === 'edit-page') {
+        // Get all pages for parent dropdown
+        $pages = get_pages([
+            'sort_column' => 'menu_order, post_title',
+            'hierarchical' => 0
+        ]);
+
+        $pages_options = '<option value="0">No parent</option>';
+        foreach ($pages as $page) {
+            $pages_options .= sprintf(
+                '<option value="%d">%s</option>',
+                $page->ID,
+                str_repeat('&mdash; ', count(explode('/', trim(parse_url(get_permalink($page->ID), PHP_URL_PATH), '/'))) - 1) . esc_html($page->post_title)
+            );
+        }
     ?>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-                // Add meta description field to quick edit form
-                var metaDescriptionField = `
-                <fieldset class="inline-edit-col-right">
+                // Add enhanced meta fields to quick edit form
+                var enhancedMetaFields = `
+                <fieldset class="inline-edit-col-right le-custom-meta-fields">
                     <div class="inline-edit-col">
+                        <h4>Page Settings</h4>
+                        <label class="inline-edit-group">
+                            <span class="title">Page Slug</span>
+                            <input type="text" name="post_name" class="large-text" 
+                                placeholder="Page slug (URL)" />
+                            <span class="description">The URL slug for this page (e.g., 'contact', 'about-us')</span>
+                        </label>
+                        <label class="inline-edit-group">
+                            <span class="title">Parent Page</span>
+                            <select name="post_parent" class="large-text">
+                                <?php echo $pages_options; ?>
+                            </select>
+                            <span class="description">Choose a parent page to create a hierarchy</span>
+                        </label>
+                        <h4>SEO Settings</h4>
                         <label class="inline-edit-group">
                             <span class="title">Custom Page Title</span>
                             <input type="text" name="custom_page_title" class="large-text" maxlength="70" 
@@ -123,10 +185,10 @@ function le_custom_add_quick_edit_meta_description_alternative()
                 </fieldset>
             `;
 
-                // Insert the field into the quick edit form
-                $('.inline-edit-col-right').append(metaDescriptionField);
+                // Insert the enhanced fields into the quick edit form
+                $('.inline-edit-col-right').last().after(enhancedMetaFields);
 
-                // Add character counter
+                // Add character counters
                 $('textarea[name="meta_description"]').on('input', function() {
                     var currentLength = $(this).val().length;
                     var maxLength = 160;
@@ -136,7 +198,9 @@ function le_custom_add_quick_edit_meta_description_alternative()
                     $(this).siblings('.char-counter').remove();
 
                     // Add character counter
-                    var counter = $('<span class="char-counter" style="display: block; margin-top: 5px; font-size: 12px; color: #666;"></span>');
+                    var counter = $(
+                        '<span class="char-counter" style="display: block; margin-top: 5px; font-size: 12px; color: #666;"></span>'
+                    );
                     $(this).after(counter);
 
                     if (remaining >= 0) {
@@ -147,6 +211,42 @@ function le_custom_add_quick_edit_meta_description_alternative()
                         counter.css('color', '#dc3232');
                     }
                 });
+
+                $('input[name="custom_page_title"]').on('input', function() {
+                    var currentLength = $(this).val().length;
+                    var maxLength = 70;
+                    var remaining = maxLength - currentLength;
+
+                    // Remove existing counter
+                    $(this).siblings('.char-counter').remove();
+
+                    // Add character counter
+                    var counter = $(
+                        '<span class="char-counter" style="display: block; margin-top: 5px; font-size: 12px; color: #666;"></span>'
+                    );
+                    $(this).after(counter);
+
+                    if (remaining >= 0) {
+                        counter.text(remaining + ' characters remaining');
+                        counter.css('color', '#666');
+                    } else {
+                        counter.text('Exceeds limit by ' + Math.abs(remaining) + ' characters');
+                        counter.css('color', '#dc3232');
+                    }
+                });
+
+                // Validate slug format
+                $('input[name="post_name"]').on('input', function() {
+                    var slug = $(this).val();
+                    var validSlug = slug.toLowerCase()
+                        .replace(/[^a-z0-9\-]/g, '-')
+                        .replace(/-+/g, '-')
+                        .replace(/^-|-$/g, '');
+
+                    if (slug !== validSlug) {
+                        $(this).val(validSlug);
+                    }
+                });
             });
         </script>
 <?php
@@ -154,7 +254,7 @@ function le_custom_add_quick_edit_meta_description_alternative()
 }
 
 /**
- * Add meta description column to pages list
+ * Add enhanced columns to pages list
  */
 function le_custom_add_meta_description_column($columns)
 {
@@ -163,8 +263,10 @@ function le_custom_add_meta_description_column($columns)
     foreach ($columns as $key => $value) {
         $new_columns[$key] = $value;
 
-        // Add meta description column after title
+        // Add new columns after title
         if ($key === 'title') {
+            $new_columns['page_slug'] = __('Slug', 'le-custom');
+            $new_columns['page_parent'] = __('Parent', 'le-custom');
             $new_columns['meta_description'] = __('Meta Description', 'le-custom');
         }
     }
@@ -174,26 +276,44 @@ function le_custom_add_meta_description_column($columns)
 add_filter('manage_pages_columns', 'le_custom_add_meta_description_column');
 
 /**
- * Display meta description in pages list
+ * Display enhanced columns in pages list
  */
 function le_custom_display_meta_description_column($column, $post_id)
 {
-    if ($column === 'meta_description') {
-        $meta_description = get_post_meta($post_id, '_meta_description', true);
+    switch ($column) {
+        case 'page_slug':
+            $post = get_post($post_id);
+            echo '<code>' . esc_html($post->post_name) . '</code>';
+            break;
 
-        if (empty($meta_description)) {
-            // Try to get from hero subtitle
-            $hero_data = le_custom_get_hero_data($post_id);
-            $meta_description = $hero_data['subtitle'] ?: '';
-        }
+        case 'page_parent':
+            $parent_id = wp_get_post_parent_id($post_id);
+            if ($parent_id) {
+                $parent_title = get_the_title($parent_id);
+                $parent_link = get_edit_post_link($parent_id);
+                echo '<a href="' . esc_url($parent_link) . '">' . esc_html($parent_title) . '</a>';
+            } else {
+                echo '<span class="no-parent">' . __('No parent', 'le-custom') . '</span>';
+            }
+            break;
 
-        if (!empty($meta_description)) {
-            $meta_description = wp_strip_all_tags($meta_description);
-            $meta_description = substr($meta_description, 0, 160);
-            echo '<div class="meta-description-preview">' . esc_html($meta_description) . '</div>';
-        } else {
-            echo '<span class="no-meta-description">' . __('No description set', 'le-custom') . '</span>';
-        }
+        case 'meta_description':
+            $meta_description = get_post_meta($post_id, '_meta_description', true);
+
+            if (empty($meta_description)) {
+                // Try to get from hero subtitle
+                $hero_data = le_custom_get_hero_data($post_id);
+                $meta_description = $hero_data['subtitle'] ?: '';
+            }
+
+            if (!empty($meta_description)) {
+                $meta_description = wp_strip_all_tags($meta_description);
+                $meta_description = substr($meta_description, 0, 160);
+                echo '<div class="meta-description-preview">' . esc_html($meta_description) . '</div>';
+            } else {
+                echo '<span class="no-meta-description">' . __('No description set', 'le-custom') . '</span>';
+            }
+            break;
     }
 }
 add_action('manage_pages_custom_column', 'le_custom_display_meta_description_column', 10, 2);
@@ -206,11 +326,12 @@ function le_custom_enqueue_quick_edit_script()
     $screen = get_current_screen();
 
     if ($screen && $screen->id === 'edit-page') {
+        // Enqueue JavaScript only
         wp_enqueue_script(
             'le-custom-quick-edit',
             get_template_directory_uri() . '/assets/js/quick-edit-meta.js',
             ['jquery'],
-            '1.0',
+            '2.0',
             true
         );
 
@@ -223,7 +344,36 @@ function le_custom_enqueue_quick_edit_script()
 add_action('admin_enqueue_scripts', 'le_custom_enqueue_quick_edit_script');
 
 /**
- * AJAX handler to get meta description for quick edit
+ * AJAX handler to get complete page data for quick edit
+ */
+function le_custom_get_page_data_ajax()
+{
+    check_ajax_referer('le_custom_quick_edit_nonce', 'nonce');
+
+    if (!current_user_can('edit_posts')) {
+        wp_die(__('Insufficient permissions', 'le-custom'));
+    }
+
+    $post_id = intval($_POST['post_id']);
+    $post = get_post($post_id);
+
+    if (!$post) {
+        wp_send_json_error(['message' => 'Post not found']);
+    }
+
+    $data = [
+        'meta_description' => get_post_meta($post_id, '_meta_description', true),
+        'custom_title' => get_post_meta($post_id, '_custom_page_title', true),
+        'parent_id' => $post->post_parent,
+        'slug' => $post->post_name
+    ];
+
+    wp_send_json_success($data);
+}
+add_action('wp_ajax_le_custom_get_page_data', 'le_custom_get_page_data_ajax');
+
+/**
+ * AJAX handler to get meta description for quick edit (legacy support)
  */
 function le_custom_get_meta_description_ajax()
 {
