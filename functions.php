@@ -80,7 +80,7 @@ function le_custom_enqueue_styles()
         [],
         '1.0'
     );
-    
+
     // Enqueue compiled Tailwind CSS
     wp_enqueue_style(
         'tailwind-style',
