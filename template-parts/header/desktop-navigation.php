@@ -76,7 +76,13 @@
                 {
                     $indent = str_repeat("\t", $depth);
                     $submenu_class = ($depth > 0) ? 'sub-submenu' : 'submenu';
-                    $output .= "\n$indent<ul class=\"$submenu_class absolute left-0 top-full bg-white shadow-xl border border-gray-100 rounded-xl py-3 min-w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-sm\">\n";
+
+                    // Add multi-column support for main submenus (depth 0) with many items
+                    if ($depth === 0) {
+                        $output .= "\n$indent<ul class=\"$submenu_class multi-column-submenu absolute -left-40 top-full bg-white shadow-xl border border-gray-100 rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-sm\">\n";
+                    } else {
+                        $output .= "\n$indent<ul class=\"$submenu_class absolute left-0 top-full bg-white shadow-xl border border-gray-100 rounded-xl py-3 min-w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-sm\">\n";
+                    }
                 }
 
                 public function end_lvl(&$output, $depth = 0, $args = null)

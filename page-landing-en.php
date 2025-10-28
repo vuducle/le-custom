@@ -75,11 +75,12 @@ get_header(); ?>
     $about_data = le_custom_get_about_data();
     $contact_data = le_custom_get_contact_data();
     ?>
-    <section class="about-section py-20 bg-gray-50 mt-24">
+    <section class="about-section py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <?php if (!empty($about_data['blocks'])): ?>
                 <?php foreach ($about_data['blocks'] as $block_index => $block): ?>
-                    <div class="mb-20 last:mb-0" data-aos="fade-up" data-aos-delay="<?php echo $block_index * 200; ?>" data-aos-duration="800">
+                    <div class="mb-20 last:mb-0" data-aos="fade-up" data-aos-delay="<?php echo $block_index * 200; ?>"
+                        data-aos-duration="800">
                         <?php if ($block['position'] === 'text-only'): ?>
                             <!-- Text Only Layout -->
                             <div class="max-w-4xl mx-auto text-center">
@@ -206,7 +207,8 @@ get_header(); ?>
                 <?php endforeach; ?>
             <?php else: ?>
                 <!-- Fallback to legacy single block structure -->
-                <div class="grid lg:grid-cols-2 gap-12 items-center" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+                <div class="grid lg:grid-cols-2 gap-12 items-center" data-aos="fade-up" data-aos-delay="100"
+                    data-aos-duration="800">
                     <div>
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                             <?php echo esc_html(isset($about_data['title']) && $about_data['title'] ? $about_data['title'] : 'About Our Practice'); ?>
