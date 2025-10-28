@@ -24,6 +24,19 @@ function le_custom_output_dynamic_css()
     echo '--primary-color-light: ' . esc_attr($color_scheme['primary_light']) . ';';
     echo '--secondary-color: ' . esc_attr($color_scheme['secondary']) . ';';
     echo '--secondary-color-light: ' . esc_attr($color_scheme['secondary_light']) . ';';
+
+    // Gallery-specific color variables with transparency
+    $primary_rgb = hex2rgb($color_scheme['primary']);
+    $secondary_rgb = hex2rgb($color_scheme['secondary']);
+    echo '--primary-color-15: rgba(' . esc_attr($primary_rgb) . ', 0.15);';
+    echo '--primary-color-10: rgba(' . esc_attr($primary_rgb) . ', 0.1);';
+    echo '--primary-color-90: rgba(' . esc_attr($primary_rgb) . ', 0.9);';
+    echo '--primary-color-95: rgba(' . esc_attr($primary_rgb) . ', 0.95);';
+    echo '--secondary-color-05: rgba(' . esc_attr($secondary_rgb) . ', 0.05);';
+    echo '--secondary-color-20: rgba(' . esc_attr($secondary_rgb) . ', 0.2);';
+    echo '--secondary-color-30: rgba(' . esc_attr($secondary_rgb) . ', 0.3);';
+    echo '--secondary-color-40: rgba(' . esc_attr($secondary_rgb) . ', 0.4);';
+
     echo '}';
 
     // Modern 2025 Header Styles
