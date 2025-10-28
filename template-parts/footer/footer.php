@@ -60,13 +60,16 @@ if (!empty($footer_bg_image)) {
 // Determine text color based on background
 $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
 ?>
-<footer class="<?php echo esc_attr($text_color_class); ?> relative overflow-hidden" style="<?php echo $footer_style; ?>">
+<footer class="<?php echo esc_attr($text_color_class); ?> relative overflow-hidden"
+    style="<?php echo $footer_style; ?>">
     <?php if (!empty($footer_bg_image)): ?>
-        <!-- Background overlay for better text readability -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-900/70 to-gray-800/90"></div>
+    <!-- Background overlay for better text readability -->
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-900/70 to-gray-800/90"></div>
     <?php else: ?>
-        <!-- Default gradient background using Primary Color Light -->
-        <div class="absolute inset-0" style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary_light']); ?> 0%, <?php echo esc_attr($color_scheme['secondary_light']); ?> 100%);"></div>
+    <!-- Default gradient background using Primary Color Light -->
+    <div class="absolute inset-0"
+        style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary_light']); ?> 0%, <?php echo esc_attr($color_scheme['secondary_light']); ?> 100%);">
+    </div>
     <?php endif; ?>
 
     <div class="relative z-10 py-16 px-4 md:px-8">
@@ -78,15 +81,29 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                 <div>
                     <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm h-full">
                         <div class="flex items-center mb-6">
-                            <div
-                                class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
+                            <?php if (has_custom_logo()) : ?>
+                            <!-- Use custom logo if available -->
+                            <div class="mr-4 flex-shrink-0">
+                                <?php 
+                                    $custom_logo_id = get_theme_mod('custom_logo');
+                                    $logo_url = wp_get_attachment_image_url($custom_logo_id, 'medium');
+                                    if ($logo_url) :
+                                    ?>
+                                <img src="<?php echo esc_url($logo_url); ?>"
+                                    alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="h-12 w-auto">
+                                <?php endif; ?>
+                            </div>
+                            <?php else : ?>
+                            <!-- Fallback icon if no custom logo -->
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 flex-shrink-0"
                                 style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
                                     </path>
                                 </svg>
                             </div>
+                            <?php endif; ?>
                             <h2 class="text-2xl font-bold text-gray-900">
                                 <?php echo esc_html($contact_data['practice_name']); ?>
                             </h2>
@@ -95,8 +112,7 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                         <!-- Address -->
                         <div class="mb-6">
                             <div class="flex items-start">
-                                <div
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
                                     style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -121,8 +137,7 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                         <!-- Phone -->
                         <div class="mb-6">
                             <div class="flex items-start">
-                                <div
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
                                     style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -146,8 +161,7 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                         <!-- Email -->
                         <div class="mb-6">
                             <div class="flex items-start">
-                                <div
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
                                     style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -171,8 +185,7 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                         <!-- Languages -->
                         <div>
                             <div class="flex items-start">
-                                <div
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
                                     style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -195,8 +208,7 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                 <div>
                     <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm h-full">
                         <div class="flex items-center mb-6">
-                            <div
-                                class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
                                 style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -211,42 +223,62 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                         <div class="space-y-3">
                             <div class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center">
-                                    <div class="w-2 h-2 rounded-full mr-3" style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;"></div>
-                                    <span class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['monday']); ?></span>
+                                    <div class="w-2 h-2 rounded-full mr-3"
+                                        style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['monday']); ?></span>
                                 </div>
-                                <span class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['monday']); ?></span>
+                                <span
+                                    class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['monday']); ?></span>
                             </div>
 
                             <div class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center">
-                                    <div class="w-2 h-2 rounded-full mr-3" style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;"></div>
-                                    <span class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['tuesday']); ?></span>
+                                    <div class="w-2 h-2 rounded-full mr-3"
+                                        style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['tuesday']); ?></span>
                                 </div>
-                                <span class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['tuesday']); ?></span>
+                                <span
+                                    class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['tuesday']); ?></span>
                             </div>
 
                             <div class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center">
-                                    <div class="w-2 h-2 rounded-full mr-3" style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;"></div>
-                                    <span class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['wednesday']); ?></span>
+                                    <div class="w-2 h-2 rounded-full mr-3"
+                                        style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['wednesday']); ?></span>
                                 </div>
-                                <span class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['wednesday']); ?></span>
+                                <span
+                                    class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['wednesday']); ?></span>
                             </div>
 
                             <div class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center">
-                                    <div class="w-2 h-2 rounded-full mr-3" style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;"></div>
-                                    <span class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['thursday']); ?></span>
+                                    <div class="w-2 h-2 rounded-full mr-3"
+                                        style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['thursday']); ?></span>
                                 </div>
-                                <span class="text-sm  text-gray-900"><?php echo esc_html($contact_data['opening_hours']['thursday']); ?></span>
+                                <span
+                                    class="text-sm  text-gray-900"><?php echo esc_html($contact_data['opening_hours']['thursday']); ?></span>
                             </div>
 
                             <div class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center">
-                                    <div class="w-2 h-2 rounded-full mr-3" style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;"></div>
-                                    <span class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['friday']); ?></span>
+                                    <div class="w-2 h-2 rounded-full mr-3"
+                                        style="background-color: <?php echo esc_attr($color_scheme['primary']); ?>;">
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-gray-800"><?php echo esc_html($labels['friday']); ?></span>
                                 </div>
-                                <span class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['friday']); ?></span>
+                                <span
+                                    class="text-sm text-gray-900"><?php echo esc_html($contact_data['opening_hours']['friday']); ?></span>
                             </div>
                         </div>
                     </div>
@@ -255,47 +287,46 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
                 <!-- Column 3: Google Maps -->
                 <div>
                     <?php if ($contact_data['maps']['show']): ?>
-                        <?php
+                    <?php
                         // Generate dynamic Google Maps URL based on current address
                         $google_maps_url = le_custom_generate_google_maps_url();
                         ?>
-                        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm h-full">
-                            <div class="flex items-center mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
-                                    style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-900">Standort</h3>
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm h-full">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
+                                style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3">
+                                    </path>
+                                </svg>
                             </div>
-                            <div class="relative overflow-hidden rounded-xl">
-                                <iframe src="<?php echo esc_url($google_maps_url); ?>" width="100%" height="300"
-                                    style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade">
-                                </iframe>
-                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Standort</h3>
                         </div>
+                        <div class="relative overflow-hidden rounded-xl">
+                            <iframe src="<?php echo esc_url($google_maps_url); ?>" width="100%" height="300"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
                     <?php else: ?>
-                        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm h-full flex items-center justify-center">
-                            <div class="text-center">
-                                <div
-                                    class="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4"
-                                    style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <p class="text-lg text-gray-700">
-                                    <?php echo esc_html($current_language === 'en' ? 'Google Maps will be displayed here' : 'Google Maps wird hier angezeigt'); ?>
-                                </p>
+                    <div
+                        class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm h-full flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4"
+                                style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3">
+                                    </path>
+                                </svg>
                             </div>
+                            <p class="text-lg text-gray-700">
+                                <?php echo esc_html($current_language === 'en' ? 'Google Maps will be displayed here' : 'Google Maps wird hier angezeigt'); ?>
+                            </p>
                         </div>
+                    </div>
                     <?php endif; ?>
                 </div>
 
@@ -305,8 +336,7 @@ $text_color_class = !empty($footer_bg_image) ? 'text-white' : 'text-gray-900';
             <div>
                 <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
                     <div class="flex items-center mb-6">
-                        <div
-                            class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4"
                             style="background: linear-gradient(135deg, <?php echo esc_attr($color_scheme['primary']); ?> 0%, <?php echo esc_attr($color_scheme['secondary']); ?> 100%);">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
