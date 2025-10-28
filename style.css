@@ -16,7 +16,7 @@ Author: Minh and Duc
 /* Custom Navigation Styles */
 .nav-link {
   position: relative;
-  padding: 0.5rem 0;
+  /* padding: 0.5rem 0; */
 }
 
 .nav-link::after {
