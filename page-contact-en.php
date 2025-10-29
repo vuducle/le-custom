@@ -122,6 +122,18 @@ $contact_data = le_custom_get_contact_data();
                         </label>
                     </div>
 
+                    <?php 
+                    $recaptcha_settings = le_custom_get_recaptcha_settings();
+                    if ($recaptcha_settings['enabled']): ?>
+                    <!-- reCAPTCHA Notice -->
+                    <div class="text-xs text-gray-500 flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" class="underline">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" class="underline">Terms of Service</a> apply.</span>
+                    </div>
+                    <?php endif; ?>
+
                     <!-- Submit Button -->
                     <button type="submit"
                         class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">

@@ -417,6 +417,51 @@ function le_custom_add_contact_section($wp_customize)
         'section' => 'contact_information',
     ]));
 
+    // reCAPTCHA v3 Settings
+    $wp_customize->add_setting('recaptcha_site_key', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ]);
+
+    $wp_customize->add_control('recaptcha_site_key', [
+        'label'       => __('reCAPTCHA Site Key', 'le-custom'),
+        'description' => __('Enter your reCAPTCHA v3 site key. Get it from <a href="https://www.google.com/recaptcha/admin" target="_blank">Google reCAPTCHA</a>', 'le-custom'),
+        'section'     => 'contact_information',
+        'type'        => 'text',
+    ]);
+
+    $wp_customize->add_setting('recaptcha_secret_key', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ]);
+
+    $wp_customize->add_control('recaptcha_secret_key', [
+        'label'       => __('reCAPTCHA Secret Key', 'le-custom'),
+        'description' => __('Enter your reCAPTCHA v3 secret key. This is used for server-side verification.', 'le-custom'),
+        'section'     => 'contact_information',
+        'type'        => 'password',
+    ]);
+
+    $wp_customize->add_setting('recaptcha_score_threshold', [
+        'default'           => '0.5',
+        'sanitize_callback' => 'le_custom_sanitize_recaptcha_score',
+        'transport'         => 'refresh',
+    ]);
+
+    $wp_customize->add_control('recaptcha_score_threshold', [
+        'label'       => __('reCAPTCHA Score Threshold', 'le-custom'),
+        'description' => __('Set the minimum score (0.0 to 1.0). Lower scores indicate more bot-like behavior. Default: 0.5', 'le-custom'),
+        'section'     => 'contact_information',
+        'type'        => 'number',
+        'input_attrs' => [
+            'min'  => '0.0',
+            'max'  => '1.0',
+            'step' => '0.1',
+        ],
+    ]);
+
     // Selective refresh for contact information
     $wp_customize->selective_refresh->add_partial('contact_information', [
         'selector'        => '.contact-info-bar',
@@ -480,6 +525,83 @@ function le_custom_add_footer_section($wp_customize)
 function le_custom_sanitize_checkbox($checked)
 {
     return ((isset($checked) && true == $checked) ? true : false);
+}
+
+/**
+ * Sanitize reCAPTCHA score threshold
+ * 
+ * @param string $score The score value
+ * @return float Sanitized score between 0.0 and 1.0
+ */
+function le_custom_sanitize_recaptcha_score($score)
+{
+    $score = floatval($score);
+    return max(0.0, min(1.0, $score));
+}
+
+/**
+ * Get reCAPTCHA settings
+ * 
+ * @return array reCAPTCHA configuration
+ */
+function le_custom_get_recaptcha_settings()
+{
+    return [
+        'site_key' => get_theme_mod('recaptcha_site_key', ''),
+        'secret_key' => get_theme_mod('recaptcha_secret_key', ''),
+        'score_threshold' => get_theme_mod('recaptcha_score_threshold', '0.5'),
+        'enabled' => !empty(get_theme_mod('recaptcha_site_key', '')) && !empty(get_theme_mod('recaptcha_secret_key', ''))
+    ];
+}
+
+/**
+ * Verify reCAPTCHA token
+ * 
+ * @param string $token reCAPTCHA token
+ * @param string $action Action name
+ * @return array Verification result
+ */
+function le_custom_verify_recaptcha($token, $action = 'contact_form')
+{
+    $recaptcha_settings = le_custom_get_recaptcha_settings();
+    
+    if (!$recaptcha_settings['enabled']) {
+        return ['success' => true, 'score' => 1.0, 'reason' => 'reCAPTCHA not configured'];
+    }
+
+    $response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+        'body' => [
+            'secret' => $recaptcha_settings['secret_key'],
+            'response' => $token,
+            'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+        ]
+    ]);
+
+    if (is_wp_error($response)) {
+        return ['success' => false, 'score' => 0.0, 'reason' => 'Network error'];
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $data = json_decode($body, true);
+
+    if (!$data['success']) {
+        return ['success' => false, 'score' => 0.0, 'reason' => 'Invalid token'];
+    }
+
+    // Check action
+    if (isset($data['action']) && $data['action'] !== $action) {
+        return ['success' => false, 'score' => 0.0, 'reason' => 'Action mismatch'];
+    }
+
+    // Check score
+    $score = $data['score'] ?? 0.0;
+    $threshold = floatval($recaptcha_settings['score_threshold']);
+    
+    if ($score < $threshold) {
+        return ['success' => false, 'score' => $score, 'reason' => 'Score too low'];
+    }
+
+    return ['success' => true, 'score' => $score, 'reason' => 'Verified'];
 }
 
 // Contact data function moved to functions.php to avoid duplication
