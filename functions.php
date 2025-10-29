@@ -66,7 +66,7 @@ function le_custom_enqueue_scripts()
     // reCAPTCHA v3 script for contact pages
     if (is_page_template('page-contact-de.php') || is_page_template('page-contact-en.php')) {
         $recaptcha_settings = le_custom_get_recaptcha_settings();
-        
+
         if ($recaptcha_settings['enabled']) {
             wp_enqueue_script(
                 'google-recaptcha',

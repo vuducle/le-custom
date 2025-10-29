@@ -604,16 +604,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData(this);
         formData.append('action', 'contact_form_submit');
         formData.append('nonce', leCustomContact?.nonce || '');
-        
+
         if (recaptchaToken) {
           formData.append('g-recaptcha-response', recaptchaToken);
         }
 
         // Send AJAX request
-        fetch(leCustomContact?.ajaxUrl || '/wp-admin/admin-ajax.php', {
-          method: 'POST',
-          body: formData,
-        })
+        fetch(
+          leCustomContact?.ajaxUrl || '/wp-admin/admin-ajax.php',
+          {
+            method: 'POST',
+            body: formData,
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             if (data.success) {
@@ -694,9 +697,15 @@ document.addEventListener('DOMContentLoaded', function () {
       };
 
       // Execute reCAPTCHA if enabled, otherwise submit directly
-      if (leCustomContact?.recaptcha?.enabled && typeof grecaptcha !== 'undefined') {
+      if (
+        leCustomContact?.recaptcha?.enabled &&
+        typeof grecaptcha !== 'undefined'
+      ) {
         grecaptcha.ready(() => {
-          grecaptcha.execute(leCustomContact.recaptcha.siteKey, { action: 'contact_form' })
+          grecaptcha
+            .execute(leCustomContact.recaptcha.siteKey, {
+              action: 'contact_form',
+            })
             .then((token) => {
               submitForm(token);
             });

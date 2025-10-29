@@ -564,7 +564,7 @@ function le_custom_get_recaptcha_settings()
 function le_custom_verify_recaptcha($token, $action = 'contact_form')
 {
     $recaptcha_settings = le_custom_get_recaptcha_settings();
-    
+
     if (!$recaptcha_settings['enabled']) {
         return ['success' => true, 'score' => 1.0, 'reason' => 'reCAPTCHA not configured'];
     }
@@ -596,7 +596,7 @@ function le_custom_verify_recaptcha($token, $action = 'contact_form')
     // Check score
     $score = $data['score'] ?? 0.0;
     $threshold = floatval($recaptcha_settings['score_threshold']);
-    
+
     if ($score < $threshold) {
         return ['success' => false, 'score' => $score, 'reason' => 'Score too low'];
     }
