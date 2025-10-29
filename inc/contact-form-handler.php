@@ -88,6 +88,14 @@ function le_custom_handle_contact_form()
         wp_send_json_error(['message' => $messages['security_failed']]);
     }
 
+    // Verify reCAPTCHA if enabled
+    if (isset($_POST['g-recaptcha-response'])) {
+        $recaptcha_result = le_custom_verify_recaptcha($_POST['g-recaptcha-response'], 'contact_form');
+        if (!$recaptcha_result['success']) {
+            wp_send_json_error(['message' => $messages['security_failed']]);
+        }
+    }
+
     // Validate required fields
     $required_fields = ['first_name', 'last_name', 'email', 'subject', 'message'];
     $missing_fields = [];

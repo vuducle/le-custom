@@ -598,22 +598,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 </span>
             `;
 
-      // Prepare form data for AJAX
-      const formData = new FormData(this);
-      formData.append('action', 'contact_form_submit');
-      formData.append('nonce', leCustomContact?.nonce || '');
+      // Handle reCAPTCHA if enabled
+      const submitForm = (recaptchaToken = null) => {
+        // Prepare form data for AJAX
+        const formData = new FormData(this);
+        formData.append('action', 'contact_form_submit');
+        formData.append('nonce', leCustomContact?.nonce || '');
 
-      // Send AJAX request
-      fetch(leCustomContact?.ajaxUrl || '/wp-admin/admin-ajax.php', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            // Show success message
-            const currentLang = getCurrentLanguage();
-            submitButton.innerHTML = `
+        if (recaptchaToken) {
+          formData.append('g-recaptcha-response', recaptchaToken);
+        }
+
+        // Send AJAX request
+        fetch(
+          leCustomContact?.ajaxUrl || '/wp-admin/admin-ajax.php',
+          {
+            method: 'POST',
+            body: formData,
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              // Show success message
+              const currentLang = getCurrentLanguage();
+              submitButton.innerHTML = `
                         <span class="flex items-center justify-center space-x-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -621,70 +630,89 @@ document.addEventListener('DOMContentLoaded', function () {
                             <span>${notificationMessages[currentLang].success}</span>
                         </span>
                     `;
-            submitButton.classList.remove(
-              'bg-gradient-to-r',
-              'from-emerald-500',
-              'to-emerald-600',
-              'hover:from-emerald-600',
-              'hover:to-emerald-700'
-            );
-            submitButton.classList.add(
-              'bg-green-600',
-              'hover:bg-green-700'
-            );
-
-            // Reset form
-            this.reset();
-
-            // Show success notification
-            showNotification(
-              data.data.message ||
-                notificationMessages[currentLang].success,
-              'success'
-            );
-
-            // Reset button after 3 seconds
-            setTimeout(() => {
-              submitButton.disabled = false;
-              submitButton.innerHTML = originalText;
               submitButton.classList.remove(
-                'bg-green-600',
-                'hover:bg-green-700'
-              );
-              submitButton.classList.add(
                 'bg-gradient-to-r',
                 'from-emerald-500',
                 'to-emerald-600',
                 'hover:from-emerald-600',
                 'hover:to-emerald-700'
               );
-            }, 3000);
-          } else {
-            // Show error notification
+              submitButton.classList.add(
+                'bg-green-600',
+                'hover:bg-green-700'
+              );
+
+              // Reset form
+              form.reset();
+
+              // Show success notification
+              showNotification(
+                data.data.message ||
+                  notificationMessages[currentLang].success,
+                'success'
+              );
+
+              // Reset button after 3 seconds
+              setTimeout(() => {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+                submitButton.classList.remove(
+                  'bg-green-600',
+                  'hover:bg-green-700'
+                );
+                submitButton.classList.add(
+                  'bg-gradient-to-r',
+                  'from-emerald-500',
+                  'to-emerald-600',
+                  'hover:from-emerald-600',
+                  'hover:to-emerald-700'
+                );
+              }, 3000);
+            } else {
+              // Show error notification
+              const currentLang = getCurrentLanguage();
+              showNotification(
+                data.data.message ||
+                  notificationMessages[currentLang].error,
+                'error'
+              );
+
+              // Reset button
+              submitButton.disabled = false;
+              submitButton.innerHTML = originalText;
+            }
+          })
+          .catch((error) => {
+            console.error('Contact form error:', error);
             const currentLang = getCurrentLanguage();
             showNotification(
-              data.data.message ||
-                notificationMessages[currentLang].error,
+              notificationMessages[currentLang].error,
               'error'
             );
 
             // Reset button
             submitButton.disabled = false;
             submitButton.innerHTML = originalText;
-          }
-        })
-        .catch((error) => {
-          console.error('Contact form error:', error);
-          const currentLang = getCurrentLanguage();
-          showNotification(
-            notificationMessages[currentLang].error,
-            'error'
-          );
+          });
+      };
 
-          // Reset button
-          submitButton.disabled = false;
-          submitButton.innerHTML = originalText;
+      // Execute reCAPTCHA if enabled, otherwise submit directly
+      if (
+        leCustomContact?.recaptcha?.enabled &&
+        typeof grecaptcha !== 'undefined'
+      ) {
+        grecaptcha.ready(() => {
+          grecaptcha
+            .execute(leCustomContact.recaptcha.siteKey, {
+              action: 'contact_form',
+            })
+            .then((token) => {
+              submitForm(token);
+            });
         });
+      } else {
+        submitForm();
+      }
     });
   }
 

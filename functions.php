@@ -28,6 +28,9 @@ require_once get_template_directory() . '/inc/sitemap-generator.php';
 require_once get_template_directory() . '/inc/cookie-consent.php';
 require_once get_template_directory() . '/inc/quick-edit-meta.php';
 
+// Initialize functionality
+le_custom_init_contact_form();
+
 // Add theme support
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
@@ -60,11 +63,28 @@ function le_custom_enqueue_scripts()
         true
     );
 
-    // Localize script for contact forms
+    // reCAPTCHA v3 script for contact pages
     if (is_page_template('page-contact-de.php') || is_page_template('page-contact-en.php')) {
+        $recaptcha_settings = le_custom_get_recaptcha_settings();
+
+        if ($recaptcha_settings['enabled']) {
+            wp_enqueue_script(
+                'google-recaptcha',
+                'https://www.google.com/recaptcha/api.js?render=' . $recaptcha_settings['site_key'],
+                [],
+                null,
+                true
+            );
+        }
+
+        // Localize script for contact forms
         wp_localize_script('theme-js', 'leCustomContact', [
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('contact_form_nonce')
+            'nonce' => wp_create_nonce('contact_form_nonce'),
+            'recaptcha' => [
+                'enabled' => $recaptcha_settings['enabled'],
+                'siteKey' => $recaptcha_settings['site_key']
+            ]
         ]);
     }
 }
