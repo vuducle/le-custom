@@ -265,6 +265,16 @@ The system automatically detects the current language based on:
 3. **Add Messages**: Add to `notificationMessages` object
 4. **Create Email Templates**: Add to `le_custom_get_notification_messages()`
 
+## Gallery Block
+
+### Known Issues and Usage Notes
+
+- **Recreating Galleries**: If you encounter unexpected behavior after theme updates or modifications, it is recommended to delete the existing gallery block and recreate it from scratch. This ensures all new functionalities and fixes are properly applied.
+
+- **Image Replacement Functionality**: The "Replace" functionality within the gallery block in the Gutenberg editor has been improved. However, if issues persist, recreating the gallery or manually adding and removing images might be a more reliable workaround.
+
+- **Lightbox for Identical Images**: The lightbox functionality (provided by SimpleLightbox) may not work as expected if you include multiple identical images within the same gallery. Ensure that each image in your gallery is unique for the lightbox to function correctly. This is a limitation of the SimpleLightbox library's handling of duplicate image sources within a single gallery instance.
+
 ## Troubleshooting
 
 ### Contact Form Issues
