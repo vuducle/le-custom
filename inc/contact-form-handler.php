@@ -155,7 +155,7 @@ function le_custom_handle_contact_form()
 
     if ($email_sent) {
         // Send confirmation email to user
-        le_custom_send_confirmation_email($form_data);
+        le_custom_send_confirmation_email($form_data, $language);
 
         wp_send_json_success([
             'message' => $messages['success']
@@ -293,87 +293,228 @@ function le_custom_build_contact_email($form_data)
 /**
  * Send confirmation email to user
  */
-function le_custom_send_confirmation_email($form_data)
+function le_custom_send_confirmation_email($form_data, $language = 'de')
 {
-    $subject = sprintf(
-        __('Thank you for contacting %s', 'le-custom'),
-        get_bloginfo('name')
-    );
+    $is_german = ($language === 'de');
+
+    // --- Get custom data ---
+    $color_scheme = le_custom_get_color_scheme_data();
+    $contact_data = le_custom_get_contact_data();
+
+    $logo_id = get_theme_mod('custom_logo');
+    $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'medium') : null;
+
+    $primary_color = $color_scheme['primary'] ?? '#1e3a8a';
+    // --- End custom data ---
+
+    $subject = $is_german ?
+        sprintf('Bestätigung Ihrer Kontaktanfrage an %s', get_bloginfo('name')) :
+        sprintf('Thank you for contacting %s', get_bloginfo('name'));
 
     ob_start();
 ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="<?php echo $is_german ? 'de' : 'en'; ?>">
 
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?php echo esc_html($subject); ?></title>
         <style>
             body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
+                margin: 0;
+                padding: 0;
+                -webkit-font-smoothing: antialiased;
+                background-color: #f0f4f8;
             }
 
-            .container {
+            table {
+                border-collapse: collapse;
+            }
+
+            .main-table {
+                width: 100%;
+                background-color: #f0f4f8;
+            }
+
+            .content-table {
+                width: 100%;
                 max-width: 600px;
                 margin: 0 auto;
-                padding: 20px;
             }
 
-            .header {
-                background: #059669;
+            .header-cell {
+                padding: 40px;
+                text-align: center;
+                background-color: <?php echo esc_attr($primary_color);
+                                    ?>;
                 color: white;
-                padding: 20px;
-                text-align: center;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
             }
 
-            .content {
-                padding: 20px;
-                background: #f9f9f9;
+            .header-cell .logo {
+                max-width: 150px;
+                height: auto;
+                margin-bottom: 20px;
             }
 
-            .footer {
-                text-align: center;
+            .header-cell h1 {
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 28px;
+                font-weight: 700;
+                color: white;
+                margin: 0;
+            }
+
+            .content-cell {
+                padding: 20px 40px;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.6;
+                color: #334155;
+            }
+
+            .content-cell p {
+                margin: 0 0 16px;
+            }
+
+            .content-cell strong {
+                color: <?php echo esc_attr($primary_color);
+                        ?>;
+            }
+
+            .details-box {
+                background-color: #f8fafc;
+                border-radius: 12px;
                 padding: 20px;
-                color: #666;
+                margin: 20px 0;
+                border: 1px solid #e5e7eb;
+            }
+
+            .footer-cell {
+                padding: 30px 40px;
+                text-align: center;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
                 font-size: 12px;
+                color: #475569;
+                border-top: 1px solid #e5e7eb;
+            }
+
+            .footer-cell a {
+                color: <?php echo esc_attr($primary_color);
+                        ?>;
+                text-decoration: none;
             }
         </style>
     </head>
 
     <body>
-        <div class="container">
-            <div class="header">
-                <h1><?php echo get_bloginfo('name'); ?></h1>
-            </div>
+        <table class="main-table" cellpadding="0" cellspacing="0">
+            <tr>
+                <td align="center" style="padding: 40px 20px;">
+                    <table class="content-table" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td
+                                style="background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);">
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="header-cell">
+                                            <?php if ($logo_url) : ?>
+                                                <img src="<?php echo esc_url($logo_url); ?>"
+                                                    alt="<?php echo esc_attr(get_bloginfo('name')); ?> Logo" class="logo">
+                                            <?php else : ?>
+                                                <h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-cell">
+                                            <?php if ($is_german) : ?>
+                                                <p>Guten Tag <?php echo esc_html($form_data['first_name']); ?>
+                                                    <?php echo esc_html($form_data['last_name']); ?>,</p>
+                                                <p>vielen Dank für Ihre Kontaktaufnahme. Wir haben Ihre Nachricht erhalten und
+                                                    werden uns so schnell wie möglich bei Ihnen melden.</p>
+                                                <p>Zu Ihrer Information finden Sie hier die Details Ihrer Anfrage:</p>
+                                                <div class="details-box">
+                                                    <p><strong>Betreff:</strong> <?php echo esc_html($form_data['subject']); ?>
+                                                    </p>
+                                                    <p><strong>Ihre
+                                                            Nachricht:</strong><br><?php echo nl2br(esc_html($form_data['message'])); ?>
+                                                    </p>
+                                                </div>
+                                                <p>Bei dringenden Fragen zögern Sie bitte nicht, uns direkt anzurufen.</p>
+                                                <p>Mit freundlichen Grüßen,<br>Ihr Team von
+                                                    <?php echo esc_html(get_bloginfo('name')); ?></p>
+                                            <?php else : ?>
+                                                <p>Dear <?php echo esc_html($form_data['first_name']); ?>
+                                                    <?php echo esc_html($form_data['last_name']); ?>,</p>
+                                                <p>Thank you for contacting us. We have received your message and will get back
+                                                    to you as soon as possible.</p>
+                                                <p>For your reference, here are the details of your message:</p>
+                                                <div class="details-box">
+                                                    <p><strong>Subject:</strong> <?php echo esc_html($form_data['subject']); ?>
+                                                    </p>
+                                                    <p><strong>Your
+                                                            Message:</strong><br><?php echo nl2br(esc_html($form_data['message'])); ?>
+                                                    </p>
+                                                </div>
+                                                <p>If you have any urgent questions, please don't hesitate to call us directly.
+                                                </p>
+                                                <p>Best regards,<br>The <?php echo esc_html(get_bloginfo('name')); ?> Team</p>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="footer-cell">
+                                            <p>&copy; <?php echo date('Y'); ?>
+                                                <?php echo esc_html(get_bloginfo('name')); ?>. All Rights Reserved.</p>
+                                            <?php if (!empty($contact_data['address'])) : ?>
+                                                <p>
+                                                    <?php echo esc_html($contact_data['address']['street']); ?>,
+                                                    <?php echo esc_html($contact_data['address']['city']); ?>
+                                                </p>
+                                                <p>
+                                                    <?php echo esc_html($contact_data['address']['country']); ?>
+                                                </p>
+                                                <?php if ($is_german) : ?>
+                                                    <div class="contact-details julia-nguyen-ist-besser-als-triesnha-ameilya">
+                                                        <p>Telefon:
+                                                            <a href="tel:<?php echo esc_html($contact_data['phone']['link']); ?>">
+                                                                <?php echo esc_html($contact_data['phone']['display']); ?>
+                                                            </a>
+                                                        </p>
+                                                        <p>E-Mail: <a
+                                                                href="mailto:<?php echo esc_html($contact_data['email']); ?>"><?php echo esc_html($contact_data['email']); ?></a>
+                                                        </p>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if (!$is_german) : ?>
+                                                    <div class="contact-details julia-nguyen-ist-besser-als-triesnha-ameilya">
+                                                        <p>Phone:
+                                                            <a href="tel:<?php echo esc_html($contact_data['phone']['link']); ?>">
+                                                                <?php echo esc_html($contact_data['phone']['display']); ?>
+                                                            </a>
+                                                        </p>
+                                                        <p>Email: <a
+                                                                href="mailto:<?php echo esc_html($contact_data['email']); ?>"><?php echo esc_html($contact_data['email']); ?></a>
+                                                        </p>
+                                                    </div>
+                                                <?php endif; ?>
 
-            <div class="content">
-                <p><?php _e('Dear', 'le-custom'); ?> <?php echo esc_html($form_data['first_name']); ?>,</p>
-
-                <p><?php _e('Thank you for contacting us. We have received your message and will get back to you as soon as possible.', 'le-custom'); ?>
-                </p>
-
-                <p><?php _e('For your reference, here are the details of your message:', 'le-custom'); ?></p>
-
-                <ul>
-                    <li><strong><?php _e('Subject:', 'le-custom'); ?></strong>
-                        <?php echo esc_html($form_data['subject']); ?></li>
-                    <li><strong><?php _e('Message:', 'le-custom'); ?></strong>
-                        <?php echo esc_html($form_data['message']); ?></li>
-                </ul>
-
-                <p><?php _e('If you have any urgent questions, please don\'t hesitate to call us directly.', 'le-custom'); ?>
-                </p>
-
-                <p><?php _e('Best regards,', 'le-custom'); ?><br>
-                    <?php echo get_bloginfo('name'); ?></p>
-            </div>
-
-            <div class="footer">
-                <p><?php _e('This is an automated confirmation email. Please do not reply to this message.', 'le-custom'); ?>
-                </p>
-            </div>
-        </div>
+                                                <!-- <p><?php echo var_dump($contact_data['address']); ?></p> -->
+                                            <?php endif; ?>
+                                            <p><?php echo $is_german ? 'Dies ist eine automatische Bestätigungs-E-Mail. Bitte antworten Sie nicht auf diese Nachricht.' : 'This is an automated confirmation email. Please do not reply to this message.'; ?>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </body>
 
     </html>
