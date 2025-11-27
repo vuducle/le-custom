@@ -128,13 +128,9 @@ $contact_data = le_custom_get_contact_data();
                         <!-- reCAPTCHA Notice -->
                         <div class="text-xs text-gray-500 flex items-center space-x-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span>This site is protected by reCAPTCHA and the Google <a
-                                    href="https://policies.google.com/privacy" target="_blank" class="underline">Privacy
-                                    Policy</a> and <a href="https://policies.google.com/terms" target="_blank"
-                                    class="underline">Terms of Service</a> apply.</span>
+                            <span>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" class="underline">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" class="underline">Terms of Service</a> apply.</span>
                         </div>
                     <?php endif; ?>
 
