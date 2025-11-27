@@ -7,7 +7,7 @@
  */
 ?>
 
-<div class="hidden lg:flex items-center space-x-6">
+<div class="hidden lg:flex items-center space-x-6 flex-1 justify-center">
     <?php
     $nav_location = le_custom_get_navigation_menu('primary');
     if ($nav_location) {
@@ -49,7 +49,7 @@
                     $item_output = $args->before;
 
                     // Base classes for all nav items
-                    $link_classes = 'nav-link px-6 py-3 text-gray-700 font-medium hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200 relative group';
+                    $link_classes = 'nav-link px-1 py-1 text-gray-700 font-medium hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200 relative group';
 
                     // Add active state styling
                     if (in_array('current-menu-item', $classes)) {
@@ -81,7 +81,7 @@
                     if ($depth === 0) {
                         $output .= "\n$indent<ul class=\"$submenu_class multi-column-submenu absolute -left-40 top-full bg-white shadow-xl border border-gray-100 rounded-xl py-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-sm\">\n";
                     } else {
-                        $output .= "\n$indent<ul class=\"$submenu_class absolute left-0 top-full bg-white shadow-xl border border-gray-100 rounded-xl py-3 min-w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-sm\">\n";
+                        $output .= "\n$indent<ul class=\"$submenu_class absolute left-0 top-full bg-white shadow-xl border border-gray-100 rounded-xl py-3 min-w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-sm\">\n";
                     }
                 }
 

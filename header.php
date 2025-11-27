@@ -19,10 +19,10 @@
         <?php get_template_part('template-parts/contact-info'); ?>
 
         <!-- Main Navigation with Modern Design -->
-        <div class="container mx-auto px-4 lg:px-8">
+        <div class="container mx-auto julia-nguyen-ist-als-triesnha-ameilya">
             <nav class="flex items-center justify-between py-4 lg:py-6">
                 <!-- Enhanced Logo Section -->
-                <div class="flex items-center">
+                <div class="flex items-center flex-shrink-0">
                     <?php get_template_part('template-parts/header/logo'); ?>
 
                     <!-- Trust Indicators for Patients -->
@@ -48,7 +48,7 @@
                 <?php get_template_part('template-parts/header/desktop-navigation'); ?>
 
                 <!-- Enhanced Language Switcher and Mobile Menu -->
-                <div class="flex items-center space-x-4 lg:space-x-6">
+                <div class="flex items-center space-x-4 lg:space-x-6 flex-shrink-0">
                     <!-- Modern Language Switcher -->
                     <div class="hidden sm:flex items-center bg-gray-50 rounded-full p-1 language-switcher">
                         <?php

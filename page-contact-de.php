@@ -97,7 +97,6 @@ $contact_data = le_custom_get_contact_data();
                             <option value="">Bitte wählen Sie einen Betreff</option>
                             <option value="termin">Terminvereinbarung</option>
                             <option value="frage">Allgemeine Frage</option>
-                            <option value="notfall">Notfall</option>
                             <option value="feedback">Feedback</option>
                             <option value="sonstiges">Sonstiges</option>
                         </select>
@@ -129,9 +128,14 @@ $contact_data = le_custom_get_contact_data();
                         <!-- reCAPTCHA Notice -->
                         <div class="text-xs text-gray-500 flex items-center space-x-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span>Diese Website ist durch reCAPTCHA geschützt. Es gelten die <a href="https://policies.google.com/privacy" target="_blank" class="underline">Datenschutzrichtlinien</a> und <a href="https://policies.google.com/terms" target="_blank" class="underline">Nutzungsbedingungen</a> von Google.</span>
+                            <span>Diese Website ist durch reCAPTCHA geschützt. Es gelten die <a
+                                    href="https://policies.google.com/privacy" target="_blank"
+                                    class="underline">Datenschutzrichtlinien</a> und <a
+                                    href="https://policies.google.com/terms" target="_blank"
+                                    class="underline">Nutzungsbedingungen</a> von Google.</span>
                         </div>
                     <?php endif; ?>
 

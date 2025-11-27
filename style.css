@@ -135,6 +135,7 @@ Author: Minh and Duc
 .current-menu-item > a {
   color: var(--primary-color) !important;
   border-bottom: 2px solid var(--primary-color);
+  padding: 4px;
 }
 
 /* Contact information styling */
@@ -154,15 +155,53 @@ Author: Minh and Duc
 }
 
 .custom-logo-link img {
-  max-height: 50px;
+  /* Responsive logo sizing */
+  max-height: 44px;
   width: auto;
   height: auto;
+}
+
+@media (min-width: 768px) {
+  .custom-logo-link img {
+    max-height: 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .custom-logo-link img {
+    max-height: 72px;
+  }
+}
+
+/* Logo hover / focus effect: scale and subtle shadow without affecting layout */
+.custom-logo-link img {
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.custom-logo-link:hover img,
+.custom-logo-link:focus img,
+.custom-logo-link:focus-visible img {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-logo-link img {
+    transition: none;
+  }
 }
 
 /* Company name styling */
 .custom-logo-link + a {
   text-decoration: none;
   color: inherit;
+  /* Limit company name width so it doesn't push the nav; allow wrapping to two lines */
+  max-width: 260px;
+  display: inline-block;
+  vertical-align: middle;
+  overflow-wrap: break-word;
 }
 
 /* Smooth transitions for all interactive elements */
@@ -209,11 +248,11 @@ button:focus {
 .multi-column-submenu {
   display: flex;
   flex-direction: row;
-  gap: 8px;
-  min-width: 750px;
-  max-width: 950px;
+  gap: 12px;
+  min-width: 900px;
+  max-width: 1100px;
   width: max-content;
-  padding: 12px;
+  padding: 16px;
   /* Better positioning to prevent going off-screen */
   left: -160px !important; /* Move 160px to the left */
   right: auto;
@@ -239,8 +278,8 @@ button:focus {
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 180px;
-  max-width: 220px;
+  min-width: 260px;
+  max-width: 320px;
 }
 
 .multi-column-submenu li {
@@ -258,11 +297,15 @@ button:focus {
   font-weight: 500;
   border-radius: 6px;
   margin: 2px 0;
-  white-space: nowrap; /* Keep text on one line */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 13px;
-  line-height: 1.4;
+  /* Allow wrapping so long labels are fully visible */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .multi-column-submenu a:hover {
@@ -275,13 +318,13 @@ button:focus {
 @media (max-width: 1024px) {
   .multi-column-submenu {
     left: -80px !important;
-    min-width: 400px;
-    max-width: 500px;
+    min-width: 500px;
+    max-width: 650px;
   }
 
   .submenu-column {
-    min-width: 160px;
-    max-width: 200px;
+    min-width: 220px;
+    max-width: 280px;
   }
 }
 

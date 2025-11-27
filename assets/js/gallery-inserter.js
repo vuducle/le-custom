@@ -95,7 +95,7 @@
             caption: image.caption,
             thumbnail: image.sizes?.medium?.url || image.url,
           }));
-          setAttributes({ images: formattedImages });
+          setAttributes({ images: images.concat(formattedImages) });
         };
 
         const removeImage = (index) => {
@@ -105,13 +105,17 @@
         };
 
         const replaceImage = (index, newImage) => {
+          if (!newImage || newImage.length === 0) {
+            return;
+          }
+          const imageToInsert = newImage[0];
           const newImages = [...images];
           newImages[index] = {
-            id: newImage.id,
-            url: newImage.url,
-            alt: newImage.alt,
-            caption: newImage.caption || newImages[index].caption, // Keep existing caption if new one is empty
-            thumbnail: newImage.sizes?.medium?.url || newImage.url,
+            id: imageToInsert.id,
+            url: imageToInsert.url,
+            alt: imageToInsert.alt,
+            caption: imageToInsert.caption || newImages[index].caption, // Keep existing caption if new one is empty
+            thumbnail: imageToInsert.sizes?.medium?.url || imageToInsert.url,
           };
           setAttributes({ images: newImages });
         };
