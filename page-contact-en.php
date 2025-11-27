@@ -97,7 +97,6 @@ $contact_data = le_custom_get_contact_data();
                             <option value="">Please select a subject</option>
                             <option value="appointment">Appointment Booking</option>
                             <option value="question">General Question</option>
-                            <option value="emergency">Emergency</option>
                             <option value="feedback">Feedback</option>
                             <option value="other">Other</option>
                         </select>
@@ -118,7 +117,8 @@ $contact_data = le_custom_get_contact_data();
                         <input type="checkbox" id="privacy" name="privacy" required
                             class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
                         <label for="privacy" class="text-sm text-gray-600">
-                            I agree to the <a href="/privacy-policy" class="text-blue-600 hover:text-blue-700 underline">Privacy Policy</a>. *
+                            I agree to the <a href="/privacy-policy"
+                                class="text-blue-600 hover:text-blue-700 underline">Privacy Policy</a>. *
                         </label>
                     </div>
 
@@ -139,7 +139,8 @@ $contact_data = le_custom_get_contact_data();
                         class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                         <span class="flex items-center justify-center space-x-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                             </svg>
                             <span>Send Message</span>
                         </span>
@@ -168,7 +169,9 @@ $contact_data = le_custom_get_contact_data();
                             </div>
                             <div>
                                 <h4 class="font-medium text-gray-900">Address</h4>
-                                <p class="text-gray-600"><?php echo esc_html($contact_data['address']['street']); ?><br><?php echo esc_html($contact_data['address']['city']); ?></p>
+                                <p class="text-gray-600">
+                                    <?php echo esc_html($contact_data['address']['street']); ?><br><?php echo esc_html($contact_data['address']['city']); ?>
+                                </p>
                             </div>
                         </div>
 
@@ -185,7 +188,8 @@ $contact_data = le_custom_get_contact_data();
                             </div>
                             <div>
                                 <h4 class="font-medium text-gray-900">Phone</h4>
-                                <a href="tel:<?php echo esc_attr($contact_data['phone']['link']); ?>" class="text-blue-600 hover:text-blue-700">
+                                <a href="tel:<?php echo esc_attr($contact_data['phone']['link']); ?>"
+                                    class="text-blue-600 hover:text-blue-700">
                                     <?php echo esc_html($contact_data['phone']['display']); ?>
                                 </a>
                             </div>
@@ -204,7 +208,8 @@ $contact_data = le_custom_get_contact_data();
                             </div>
                             <div>
                                 <h4 class="font-medium text-gray-900">Email</h4>
-                                <a href="mailto:<?php echo esc_attr($contact_data['email']); ?>" class="text-blue-600 hover:text-blue-700">
+                                <a href="mailto:<?php echo esc_attr($contact_data['email']); ?>"
+                                    class="text-blue-600 hover:text-blue-700">
                                     <?php echo esc_html($contact_data['email']); ?>
                                 </a>
                             </div>
@@ -219,35 +224,40 @@ $contact_data = le_custom_get_contact_data();
                         <?php if (!empty($contact_data['opening_hours']['monday'])) : ?>
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-700">Monday</span>
-                                <span class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['monday']); ?></span>
+                                <span
+                                    class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['monday']); ?></span>
                             </div>
                         <?php endif; ?>
 
                         <?php if (!empty($contact_data['opening_hours']['tuesday'])) : ?>
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-700">Tuesday</span>
-                                <span class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['tuesday']); ?></span>
+                                <span
+                                    class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['tuesday']); ?></span>
                             </div>
                         <?php endif; ?>
 
                         <?php if (!empty($contact_data['opening_hours']['wednesday'])) : ?>
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-700">Wednesday</span>
-                                <span class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['wednesday']); ?></span>
+                                <span
+                                    class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['wednesday']); ?></span>
                             </div>
                         <?php endif; ?>
 
                         <?php if (!empty($contact_data['opening_hours']['thursday'])) : ?>
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-700">Thursday</span>
-                                <span class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['thursday']); ?></span>
+                                <span
+                                    class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['thursday']); ?></span>
                             </div>
                         <?php endif; ?>
 
                         <?php if (!empty($contact_data['opening_hours']['friday'])) : ?>
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-700">Friday</span>
-                                <span class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['friday']); ?></span>
+                                <span
+                                    class="text-gray-600"><?php echo esc_html($contact_data['opening_hours']['friday']); ?></span>
                             </div>
                         <?php endif; ?>
 
@@ -259,7 +269,9 @@ $contact_data = le_custom_get_contact_data();
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                             <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z">
+                                </path>
                             </svg>
                         </div>
                         <div>
@@ -270,7 +282,9 @@ $contact_data = le_custom_get_contact_data();
                             <a href="tel:<?php echo esc_attr($contact_data['phone']['link']); ?>"
                                 class="inline-flex items-center px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors duration-200">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
                                 </svg>
                                 Call Now
                             </a>

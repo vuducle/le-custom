@@ -326,18 +326,22 @@
 
         // Add hover effects for single images
         document.addEventListener('mouseenter', function(e) {
-            const singleImageContainer = e.target.closest('.single-image-with-lightbox');
-            if (singleImageContainer) {
-                singleImageContainer.classList.add('single-image-hover');
+            if (e.target && typeof e.target.closest === 'function') {
+                const singleImageContainer = e.target.closest('.single-image-with-lightbox');
+                if (singleImageContainer) {
+                    singleImageContainer.classList.add('single-image-hover');
+                }
             }
-        });
+        }, true);
 
         document.addEventListener('mouseleave', function(e) {
-            const singleImageContainer = e.target.closest('.single-image-with-lightbox');
-            if (singleImageContainer) {
-                singleImageContainer.classList.remove('single-image-hover');
+            if (e.target && typeof e.target.closest === 'function') {
+                const singleImageContainer = e.target.closest('.single-image-with-lightbox');
+                if (singleImageContainer) {
+                    singleImageContainer.classList.remove('single-image-hover');
+                }
             }
-        });
+        }, true);
     }
 
     /**

@@ -103,32 +103,62 @@ add_action('wp_enqueue_scripts', 'le_custom_enqueue_single_image_assets');
 function le_custom_filter_single_image_block($block_content, $block)
 {
     // Only process image blocks
-    if ($block['blockName'] !== 'core/image') {
+    if ($block['blockName'] !== 'core/image' || empty($block_content)) {
         return $block_content;
     }
 
-    // Add single image wrapper and lightbox classes
-    $block_content = str_replace(
-        'class="wp-block-image',
-        'class="wp-block-image single-image-with-lightbox',
-        $block_content
-    );
+    // Create a new DOMDocument object
+    $doc = new DOMDocument();
+    // Suppress errors from invalid HTML
+    @$doc->loadHTML('<?xml encoding="utf-8" ?>' . $block_content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-    // Add lazy loading to images
-    $block_content = preg_replace(
-        '/<img([^>]*)src="([^"]*)"([^>]*)>/',
-        '<img$1src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 600\'%3E%3Crect width=\'800\' height=\'600\' fill=\'%23f8fafc\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%2364748b\' font-family=\'system-ui\' font-size=\'16\'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="$2" class="lazy-image$3">',
-        $block_content
-    );
+    $figure = $doc->getElementsByTagName('figure')->item(0);
+    $img = $doc->getElementsByTagName('img')->item(0);
+    $a = $doc->getElementsByTagName('a')->item(0);
 
-    // Wrap images in lightbox links
-    $block_content = preg_replace(
-        '/<figure([^>]*)class="([^"]*)"([^>]*)>([^<]*)<img([^>]*)src="([^"]*)"([^>]*)alt="([^"]*)"([^>]*)>/',
-        '<figure$1class="$2"$3>$4<a href="$6" data-lightbox="single-image" title="$8"><img$5src="$6"$7alt="$8"$9></a>',
-        $block_content
-    );
+    if (!$figure || !$img) {
+        return $block_content;
+    }
 
-    return $block_content;
+    // Add single image wrapper and lightbox classes to figure
+    $figure_class = $figure->getAttribute('class');
+    if (strpos($figure_class, 'single-image-with-lightbox') === false) {
+        $figure->setAttribute('class', $figure_class . ' single-image-with-lightbox');
+    }
+
+    // Add lazy loading to image
+    $img_src = $img->getAttribute('src');
+    if ($img_src) {
+        $img->setAttribute('data-src', $img_src);
+        $img->setAttribute('src', 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 600\'%3E%3Crect width=\'800\' height=\'600\' fill=\'%23f8fafc\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%2364748b\' font-family=\'system-ui\' font-size=\'16\'%3ELoading...%3C/text%3E%3C/svg%3E');
+        $img_class = $img->getAttribute('class');
+        if (strpos($img_class, 'lazy-image') === false) {
+            $img->setAttribute('class', $img_class . ' lazy-image');
+        }
+    }
+    
+    // If image is already linked, just add the lightbox attribute
+    if ($a) {
+        $a->setAttribute('data-lightbox', 'single-image');
+        $img_alt = $img->getAttribute('alt');
+        if ($img_alt) {
+            $a->setAttribute('title', $img_alt);
+        }
+    } else {
+        // If image is not linked, wrap it in a link
+        $new_a = $doc->createElement('a');
+        $new_a->setAttribute('href', $img->getAttribute('data-src') ?: $img_src);
+        $new_a->setAttribute('data-lightbox', 'single-image');
+        $img_alt = $img->getAttribute('alt');
+        if ($img_alt) {
+            $new_a->setAttribute('title', $img_alt);
+        }
+        
+        $img->parentNode->insertBefore($new_a, $img);
+        $new_a->appendChild($img);
+    }
+
+    return $doc->saveHTML();
 }
 add_filter('render_block', 'le_custom_filter_single_image_block', 10, 2);
 

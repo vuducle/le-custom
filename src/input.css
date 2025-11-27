@@ -233,9 +233,22 @@
   }
 
   .custom-logo-link img {
-    max-height: 50px;
+    /* Responsive logo sizing: smaller on mobile, larger on desktop */
+    max-height: 44px;
     width: auto;
     height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .custom-logo-link img {
+      max-height: 56px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .custom-logo-link img {
+      max-height: 72px; /* larger logo for desktop */
+    }
   }
 
   /* Responsive company name */
@@ -257,11 +270,11 @@
   .multi-column-submenu {
     display: flex;
     flex-direction: row;
-    gap: 8px;
-    min-width: 750px;
-    max-width: 950px;
+    gap: 12px;
+    min-width: 900px;
+    max-width: 1100px;
     width: max-content;
-    padding: 12px;
+    padding: 16px;
     /* Better positioning to prevent going off-screen */
     left: -160px !important; /* Move 160px to the left */
     right: auto;
@@ -287,8 +300,8 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    min-width: 180px;
-    max-width: 220px;
+    min-width: 260px;
+    max-width: 320px;
   }
 
   .multi-column-submenu li {
@@ -306,11 +319,15 @@
     font-weight: 500;
     border-radius: 6px;
     margin: 2px 0;
-    white-space: nowrap; /* Keep text on one line */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 13px;
-    line-height: 1.4;
+    /* Allow labels to wrap so long names (e.g. Konservierende Zahnheilkunde) are fully visible */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .multi-column-submenu a:hover {
@@ -323,13 +340,13 @@
   @media (max-width: 1024px) {
     .multi-column-submenu {
       left: -80px !important;
-      min-width: 400px;
-      max-width: 500px;
+      min-width: 500px;
+      max-width: 650px;
     }
 
     .submenu-column {
-      min-width: 160px;
-      max-width: 200px;
+      min-width: 220px;
+      max-width: 280px;
     }
   }
 

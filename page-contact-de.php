@@ -97,7 +97,6 @@ $contact_data = le_custom_get_contact_data();
                             <option value="">Bitte wählen Sie einen Betreff</option>
                             <option value="termin">Terminvereinbarung</option>
                             <option value="frage">Allgemeine Frage</option>
-                            <option value="notfall">Notfall</option>
                             <option value="feedback">Feedback</option>
                             <option value="sonstiges">Sonstiges</option>
                         </select>
