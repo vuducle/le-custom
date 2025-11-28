@@ -93,19 +93,90 @@ $legal_data = $contact_data['legal'];
                             Email: <a href="mailto:<?php echo esc_attr($contact_data['email']); ?>"><?php echo esc_html($contact_data['email']); ?></a>
                         </p>
 
-                        <h2>4. Data Collection on This Website</h2>
+                        <h2>4. Purpose and Legal Basis for Processing Your Data</h2>
 
-                        <h3>Contact Form</h3>
-                        <p>If you send us inquiries via the contact form, your information from the inquiry form, including the contact details you provided there, will be stored by us for the purpose of processing the inquiry and in case of follow-up questions. We do not pass on this data without your consent.</p>
+                        <p>When you use our website to find out information about our practice, we do not generally collect
+                            personal data. However, our service provider collects certain technical data that is required to
+                            deliver the website and to ensure stability and security. The legal basis for this processing is
+                            Art. 6(1)(f) GDPR (legitimate interest):</p>
 
-                        <h3>Storage Period</h3>
-                        <p>Your data will be deleted as soon as it is no longer required for the purpose of processing or statutory retention periods have expired.</p>
+                        <ul>
+                            <li>IP address</li>
+                            <li>Date and time of the request</li>
+                            <li>Time zone difference to Greenwich Mean Time (GMT)</li>
+                            <li>Content of the request (specific page)</li>
+                            <li>Access status / HTTP status code</li>
+                            <li>Amount of data transferred</li>
+                            <li>Website from which the request originates (referrer)</li>
+                            <li>Browser</li>
+                            <li>Operating system and its interface</li>
+                            <li>Language and version of the browser software</li>
+                        </ul>
 
-                        <h2>5. Your Rights</h2>
-                        <p>You have the right to information, correction, deletion, and restriction of processing of your personal data. You also have the right to lodge a complaint with the competent supervisory authority.</p>
+                        <p>We do not store any cookies on your device when you use our website.</p>
 
-                        <h2>6. Changes</h2>
-                        <p>We reserve the right to adapt this privacy policy so that it always complies with current legal requirements or to implement changes to our services in the privacy policy, e.g., when introducing new services.</p>
+                        <h2>5. What Rights Do You Have in Relation to Data Protection?</h2>
+
+                        <p>You have the rights listed below. Since no personal data is collected during a purely informational
+                            visit to our website (see above), these rights are generally not applicable in that context. For
+                            data collected in the context of a telephone call or e‑mail contact, however, the following rights
+                            apply:</p>
+
+                        <ul>
+                            <li>Right to information</li>
+                            <li>Right to correction or deletion</li>
+                            <li>Right to restriction of processing</li>
+                            <li>Right to object to processing</li>
+                            <li>Right to data portability</li>
+                        </ul>
+
+                        <h2>6. External Data</h2>
+
+                        <p>We generally avoid relying on external service providers for individual functions of our website.
+                            Where external content is embedded, this is primarily through links (e.g. Google Maps). We have
+                            no control over the content of these external providers; responsibility lies with the
+                            respective providers.</p>
+
+                        <h2>7. How Can You Lodge a Complaint?</h2>
+
+                        <p>You have the option to raise a complaint regarding data processing with the competent data
+                            protection supervisory authority:</p>
+
+                        <p>
+                            Ms.<br>
+                            Maja Smoltczyk<br>
+                            Friedrichstr. 219<br>
+                            10969 Berlin<br>
+                            Phone: 030/13889-0
+                        </p>
+
+                        <h2>8. Changes</h2>
+                        <p>We reserve the right to adapt this privacy policy so that it always complies with current legal
+                            requirements or to implement changes to our services in the privacy policy, e.g. when
+                            introducing new services.</p>
+
+                        <h2>9. Use of Google reCAPTCHA</h2>
+                        <p>To protect our contact forms from spam and abuse we use Google reCAPTCHA by Google LLC. In
+                            connection with reCAPTCHA, personal data such as IP addresses and certain browser data may be
+                            transmitted to and processed by Google servers in the United States. The purpose of this
+                            processing is to distinguish between human users and automated accesses. The legal basis is
+                            Art. 6(1)(f) GDPR (legitimate interests), unless consent has been obtained beforehand.</p>
+
+                        <p>Further information about Google reCAPTCHA and Google's data processing can be found here:
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+                            and the reCAPTCHA documentation: <a href="https://developers.google.com/recaptcha" target="_blank" rel="noopener">https://developers.google.com/recaptcha</a>.
+                        </p>
+
+                        <h2>10. Use of WordPress</h2>
+                        <p>This website is built on the WordPress content management system. WordPress may store technical
+                            data, user account information (e.g. for logins) and, if enabled, comment data in our
+                            database. In addition, WordPress may set functional cookies for logged‑in users. The purpose
+                            and scope of data collection depend on the features used (e.g. login/administration or
+                            commenting).</p>
+
+                        <p>For more information on WordPress and privacy see:
+                            <a href="https://wordpress.org/about/privacy/" target="_blank" rel="noopener">https://wordpress.org/about/privacy/</a>.
+                        </p>
 
                         <p><em>Last updated: <?php echo date('F j, Y'); ?></em></p>
                     </div>

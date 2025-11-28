@@ -95,6 +95,11 @@ $legal_data = $contact_data['legal'];
                             <?php echo esc_html($contact_data['address']['city']); ?>
                         </p>
 
+                        <h2>Technical implementation / Website development</h2>
+                        <p>Website development: <strong><a href="https://mvle.de" target="_blank" rel="noopener">Vu Minh
+                                    Le</a> &amp; <a href="https://le-vu-duc.com" target="_blank" rel="noopener">Vu Duc
+                                    Le</a></strong> – theme and implementation. More information on request.</p>
+
                         <h2>EU Dispute Resolution</h2>
                         <p>The European Commission provides a platform for online dispute resolution (OS): <a
                                 href="https://ec.europa.eu/consumers/odr/" target="_blank"

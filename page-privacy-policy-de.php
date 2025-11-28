@@ -114,27 +114,93 @@ $legal_data = $contact_data['legal'];
                                 href="mailto:<?php echo esc_attr($contact_data['email']); ?>"><?php echo esc_html($contact_data['email']); ?></a>
                         </p>
 
-                        <h2>4. Datenerfassung auf dieser Website</h2>
+                        <h2>4. Welchem Zweck dienen Ihre Daten und mit welcher Rechtfertigung dürfen wir diese nutzen?</h2>
 
-                        <h3>Kontaktformular</h3>
-                        <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem
-                            Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der
-                            Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht
-                            ohne Ihre Einwilligung weiter.</p>
+                        <p>Wenn Sie unsere Internetseite nutzen, um sich über unsere Praxis zu informieren, erheben wir
+                            grundsätzlich keine personenbezogenen Daten. Wird die Website jedoch technisch ausgeliefert,
+                            erhebt unser Serviceprovider Daten, die aus technischen Gründen erforderlich sind, um Ihnen
+                            die Seite anzuzeigen und die Stabilität sowie Sicherheit zu gewährleisten. Die Rechtsgrundlage
+                            hierfür ist Art. 6 Abs. 1 S. 1 lit. f DSGVO (berechtigtes Interesse):</p>
 
-                        <h3>Speicherdauer</h3>
-                        <p>Ihre Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr erforderlich sind oder
-                            gesetzliche Aufbewahrungsfristen abgelaufen sind.</p>
+                        <ul>
+                            <li>IP-Adresse</li>
+                            <li>Datum und Uhrzeit der Anfrage</li>
+                            <li>Zeitzonendifferenz zur Greenwich Mean Time (GMT)</li>
+                            <li>Inhalt der Anforderung (konkrete Seite)</li>
+                            <li>Zugriffsstatus / HTTP-Statuscode</li>
+                            <li>Jeweils übertragene Datenmenge</li>
+                            <li>Website, von der die Anforderung kommt (Referrer)</li>
+                            <li>Browser</li>
+                            <li>Betriebssystem und dessen Oberfläche</li>
+                            <li>Sprache und Version der Browsersoftware</li>
+                        </ul>
 
-                        <h2>5. Ihre Rechte</h2>
-                        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer
-                            personenbezogenen Daten. Zudem haben Sie ein Beschwerderecht bei der zuständigen
-                            Aufsichtsbehörde.</p>
+                        <p>Bei der Nutzung unserer Internetseite werden von uns keine Cookies auf Ihrem Rechner gespeichert.
+                        </p>
 
-                        <h2>6. Änderungen</h2>
+                        <h2>5. Welche Rechte haben Sie im Zusammenhang mit dem Datenschutz?</h2>
+
+                        <p>Grundsätzlich stehen Ihnen die nachfolgenden Rechte zu. Da im Rahmen des bloßen Besuchs unserer
+                            Website keine personenbezogenen Daten von uns erhoben werden (siehe oben), sind diese Rechte
+                            für einen rein informatorischen Webseitenbesuch in der Regel nicht einschlägig. Für den Fall,
+                            dass personenbezogene Daten im Rahmen eines telefonischen oder E‑Mail-Kontakts anfallen,
+                            gelten jedoch die folgenden Rechte:</p>
+
+                        <ul>
+                            <li>Recht auf Auskunft</li>
+                            <li>Recht auf Berichtigung oder Löschung</li>
+                            <li>Recht auf Einschränkung der Verarbeitung</li>
+                            <li>Recht auf Widerspruch gegen die Verarbeitung</li>
+                            <li>Recht auf Datenübertragbarkeit</li>
+                        </ul>
+
+                        <h2>6. Externe Daten</h2>
+
+                        <p>Für einzelne Funktionen unserer Internetseite greifen wir weitestgehend nicht auf externe
+                            Dienstleister zurück. Wo externe Inhalte eingebunden sind, handelt es sich überwiegend um
+                            Links (z. B. zu Google Maps). Auf die Inhalte dieser externen Anbieter haben wir keinen
+                            Einfluss; die Verantwortung hierfür liegt bei den jeweiligen Anbietern.</p>
+
+                        <h2>7. Wie können Sie sich ggf. beschweren?</h2>
+
+                        <p>Sie haben die Möglichkeit, sich mit einer Beschwerde im Zusammenhang mit der Datenverarbeitung
+                            an die für uns zuständige Datenschutzaufsicht zu wenden:</p>
+
+                        <p>
+                            Frau<br>
+                            Maja Smoltczyk<br>
+                            Friedrichstr. 219<br>
+                            10969 Berlin<br>
+                            Telefon: 030/13889-0
+                        </p>
+
+                        <h2>8. Änderungen</h2>
                         <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen
                             rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der
                             Datenschutzerklärung umzusetzen, z. B. bei der Einführung neuer Services.</p>
+
+                        <h2>9. Einsatz von Google reCAPTCHA</h2>
+                        <p>Zum Schutz unserer Kontaktformulare und zur Verhinderung von automatisiertem Spam setzen wir
+                            Google reCAPTCHA der Firma Google LLC ein. Dabei können personenbezogene Daten wie Ihre
+                            IP‑Adresse und weitere Informationen an Server von Google in den USA übertragen und dort
+                            verarbeitet werden. Zweck der Datenverarbeitung ist die Unterscheidung zwischen menschlichen
+                            Nutzern und automatisierten Zugriffen. Die Rechtsgrundlage ist Art. 6 Abs. 1 S. 1 lit. f DSGVO
+                            (berechtigtes Interesse), sofern nicht zuvor eine Einwilligung eingeholt wurde.</p>
+
+                        <p>Weitere Informationen zu Google reCAPTCHA und den Datenverarbeitungspraktiken von Google finden
+                            Sie in den Google‑Datenschutzhinweisen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+                            und der reCAPTCHA‑Dokumentation: <a href="https://developers.google.com/recaptcha" target="_blank" rel="noopener">https://developers.google.com/recaptcha</a>.</p>
+
+                        <h2>10. Verwendung von WordPress</h2>
+                        <p>Unsere Website basiert auf dem Content‑Management‑System WordPress. WordPress kann technische
+                            Daten, Benutzerdaten (z. B. bei Anmeldung) und ggf. Kommentardaten in unserer Datenbank
+                            speichern. Darüber hinaus verwendet WordPress funktionale Cookies für eingeloggte Benutzer.
+                            Zweck und Umfang der Datenerhebung richten sich nach den eingesetzten Funktionen (z. B.
+                            Login/Administrationsbereich oder Kommentarfunktion).</p>
+
+                        <p>Weitere Informationen zum Datenschutz im Zusammenhang mit WordPress finden Sie hier:
+                            <a href="https://wordpress.org/about/privacy/" target="_blank" rel="noopener">https://wordpress.org/about/privacy/</a>.
+                        </p>
 
                         <p><em>Stand: <?php echo date('d.m.Y'); ?></em></p>
                     </div>
